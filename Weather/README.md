@@ -21,6 +21,6 @@ align=center>
 <img src="https://github.com/xkerwin/Scriptbale-Weather/blob/main/image/full%20charge.PNG?raw=true" width = "200" height = "400" alt="充满电" 
 align=center>
 
-### Tanks 
+### Thanks 
 - [JamarcusBourne](https://www.reddit.com/u/solelo/?utm_source=share&utm_medium=ios_app&utm_name=iossmf)
 - [GitHub](https://gist.github.com/Otherguy5826/a7a74b076e1bea6baaa6dd35d57090a9)
