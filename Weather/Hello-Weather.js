@@ -9,6 +9,12 @@
 // icon-color: deep-purple; icon-glyph: image;
 // This widget was created by Max Zeryck @mzeryck,在原来的基础上增加了更多内容显示（均来自网络收集）
 // Widgets are unique based on the name of the script.
+/* 更新内容===============================
+ * 1、解决了电量在充满电后继续充电不提示的问题
+ * 2、照顾以下小屏幕手机，内容字体变小，以显示全
+ * 3、代码修饰了以下，以方便普通用户查找与编辑
+ * 4、简化了配置参数修改，让普通用户更方便自定义
+*/
 
 const filename = Script.name() + ".jpg"
 const files = FileManager.local()
@@ -50,7 +56,6 @@ Checks for common file format extensions if the file is not found.
 
 if (fm.fileExists(backgroundImageURLInput) == false) {
 		var fileTypes = ['png', 'jpg', 'jpeg', 'tiff', 'webp', 'gif'];
-
 		fileTypes.forEach(function(item) {
 			if (fm.fileExists((backgroundImageURL + item.toLowerCase())) == true) {
 				backgroundImageURL = backgroundImageURLRAW + "." + item.toLowerCase();
@@ -64,24 +69,112 @@ if (fm.fileExists(backgroundImageURLInput) == false) {
 var spacing = parseInt(inputArr[1]);
 
 /*
- * WEATHER
- * =======
+ * Spacer set
+ * 间距设置
+ * ==========
+ * 
 */
+let TopSpacer = 15 //顶部间距
+let HSpacer = 5 //纵向间距
+let LeftSpacer = 5 //向左对齐间距
+/*
+ * Greetings Font/Color set
+ * 问候语字体、颜色设置
+ * ========================
+ * 
+*/
+let HelloFont = Font.boldSystemFont(35) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+let HelloColor = "ffffff" //字体颜色
+let HelloOpacity = (1) //字体不透明度
 
+/*
+ * Battery Font/Color set
+ * 电量部分字体、颜色配置
+ * =======================
+*/
+// Battery status color set
+// 电量状态颜色设置
+let FullyChargedColor = 'ff5f40'; //满电提示颜色（判断条件：电量在充电中，并充满电的状态）
+let ChargingColor     = '5e5ce6'; //正在充电中  （判断条件：在充电中且未充满电）
+let AdequateColor     = 'c4fb6d'; //电量充足颜色（判断条件：电量在80-100%）
+let NormalColor       = 'd3de32'; //电量正常颜色（判断条件：电量在50-79%）
+let Low1Corl          = 'e5df88'; //电量低颜色  （判断条件：电量在30-49%）
+let Low2Corl          = 'ffd571'; //电量偏低颜色（判断条件：电量在20-39%）
+let ScarcityColor     = 'ec0101'; //电量极低颜色（判断条件：电量在0-19%）
+
+// Battery status text set
+// 电量状态提示语设置
+let BatteryText0   = " ⚡" //当接入充电电源提示符
+let BatteryText1   = " ⚡ 已充满电!请拔下电源!" //当充满电还在充电中
+let BatteryText2   = " 电量充足,很有安全感!!!" //当电量在80-100%
+let BatteryText3   = " 电量充足,不出远门没有问题!" //当电量在70-80%
+let BatteryText4   = " 电量还有大半呢,不用着急充电!" //当电量在50-70%
+let BatteryText5   = " 电量用了一半,有时间就充电啦!" //当电量在40-50%
+let BatteryText6   = " 电量用了大半了,尽快充电啦!" //当电量在30-40%
+let BatteryText7   = " 电量就快用完,赶紧充电!" //当电量在20-30%
+let BatteryText8   = " 电量就剩不到20%了,尽快充电!" //当电量在10-20%
+let BatteryText9   = " 电量将耗尽,再不充电我就关机了!" //当电量少于10%
+let BatteryText10  = " ⚡ 充电中..." //当电量在>= 50% <100%,并在充电中
+let BatteryText11  = " 正在充入电能中..." //当电量在 < 50%
+let BatteryText12  = "⚡ 电能"
+
+// 电量提示语字体大小设置
+let BatteryTextFont = Font.regularSystemFont(12); //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+let BatteryTextOpacity = (1); //字体不透明度0-1,0.5=半透明
+
+/*
+ * YearProgress Font/Color set
+ * 年进度部分字体、颜色配置
+ * ==========================
+*/
+let YearProgressText1Font    = Font.regularSystemFont(12); //进度条字体,如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+let YearProgressTextOpacity = (1); //字体不透明度0-1,0.5=半透明
+let YearProgressColor       = '5e5ce6' //颜色
+let Yearicons               = "📅 全年" //年进度图标
+let YearProgressText2Font   = Font.regularSystemFont(14); //标语字体,如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+let YearProgressText        = " 𝒚𝒐𝒖 𝒅𝒊𝒅 𝒚𝒐𝒖𝒓 𝒃𝒆𝒔𝒕 𝒕𝒐𝒅𝒂𝒚 ?!" //年进度标语
+
+/*
+ * DATE日期信息配置
+ * ================
+ * 
+*/
+let DateTextFont = Font.regularSystemFont(30) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+let DateTextColor = "ffffff" //字体颜色
+let DateTextOpacity = (0.7) //字体不透明度
+
+/*
+ * WEATHER set
+ * 天气信息配置
+ * ================
+ * 
+*/
 // Load Your api in "".Get a free API key here: https://openweathermap.org/appid
 // 在 "" 内填写你的API—_KEY。在此处获取免费的API密钥：https://openweathermap.org/appid
 let API_WEATHER = "89065f71db2277c83d22a779a34f16a7"; 
+
 // add your city ID
 // 在 "" 内填入你的City ID。
 let CITY_WEATHER = "1809858";
 
 // Set to imperial for Fahrenheit, or metric for Celsius
 // 华氏度设置为英制imperial，摄氏度设置为公制metric
-let TEMPERATURE = "metric"
+let TEMPERATURE = "metric";
 
 // Use "\u2103" to show degrees celcius and "\u2109" to show degrees farenheit.
 // 使用 "\u2103" 为摄氏度,使用 "\u2109" 为华氏度。
-let UNITS = "\u2103"
+let UNITS = "\u2103";
+
+// 最高/低温度字体、颜色设置
+let FeelTextFont = Font.regularSystemFont(12) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+let FellTextColor = "51adcf" //字体颜色
+let FellTextOpacity = (1) //字体不透明度
+
+// 当前天气字体、颜色设置
+let TempTextFont = Font.regularSystemFont(30) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+let TempTextColor = "ffffff" //字体颜色
+let TempTextOpacity = (1) //字体不透明度
+let iconsSize = new Size(40, 40) //天气图标尺寸大小
 
 // Get storage.
 // 储存空间。
@@ -413,19 +506,27 @@ if (config.runsInWidget) {
  
 // Top spacing
 // 顶部间距
- widgetHello.addSpacer(15);
+widgetHello.addSpacer(TopSpacer);
+
+// define horizontal stack
+// 创建一个stack，使下面组件都在同一个stack中，布局为横向布局（helloStack）
+let helloStack = widgetHello.addStack();
+helloStack.layoutHorizontally();
+
+// Centers line
+helloStack.addSpacer(LeftSpacer); //Left spacing,向左对齐间距
 
 // Greeting label
 // 问候标签
-let hello = widgetHello.addText(" " + greeting);
-hello.font = Font.boldSystemFont(35); //font and size,字体与大小
-hello.textColor = new Color('e8ffc1'); //font color,字体颜色
-hello.textOpacity = (1); //opacity,不透明度
+const hello = helloStack.addText(greeting);
+hello.font = HelloFont; //font and size,字体与大小
+hello.textColor = new Color(HelloColor); //font color,字体颜色
+hello.textOpacity = HelloOpacity; //opacity,不透明度
 hello.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
  
 // Spacing between greeting and yearprogress
 // 问候标签与年进度行之间的间距
-widgetHello.addSpacer(5);
+widgetHello.addSpacer(HSpacer);
 
 // define horizontal stack
 // 创建一个stack，使下面组件都在同一个stack中，布局为横向布局（hStack0）
@@ -433,44 +534,44 @@ let hStack0 = widgetHello.addStack();
 hStack0.layoutHorizontally();
 
 // Centers line
-hStack0.addSpacer(10); //Left spacing,向左对齐间距
+hStack0.addSpacer(LeftSpacer); //Left spacing,向左对齐间距
 
 // Year icon in stack
 // 年进度图标
-const YearProgressicon = hStack0.addText("📅 全年")
-YearProgressicon.font = Font.regularSystemFont(12) //font and size,字体与大小
-YearProgressicon.textColor = new Color('#8675a9') //font color,字体颜色
-YearProgressicon.textOpacity = (1); //opacity,不透明度
+const YearProgressicon = hStack0.addText(Yearicons)
+YearProgressicon.font = YearProgressText1Font //font and size,字体与大小
+YearProgressicon.textColor = new Color(YearProgressColor) //font color,字体颜色
+YearProgressicon.textOpacity = YearProgressTextOpacity; //opacity,不透明度
 YearProgressicon.leftAlignText(); //AlignText,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
 
 // Year label in stack
 // 年进度条、标签
 const YearProgress = hStack0.addText(renderYear())
 YearProgress.font = new Font('Menlo', 12) //font and size,字体与大小
-YearProgress.textColor = new Color('#8675a9') //font color,字体颜色
-YearProgress.textOpacity = (1); //opacity,不透明度
+YearProgress.textColor = new Color(YearProgressColor) //font color,字体颜色
+YearProgress.textOpacity = YearProgressTextOpacity; 
 YearProgress.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
 
 // Year percent in stack
 // 年进度百分比
 const YearPercentage = hStack0.addText(getYearProgress())
-YearPercentage.font = Font.regularSystemFont(12) //font and size,字体与大小
-YearPercentage.textColor = new Color('#8675a9') //font color,字体颜色
-YearPercentage.textOpacity = (1); //opacity,不透明度
+YearPercentage.font = YearProgressText1Font 
+YearPercentage.textColor = new Color(YearProgressColor) 
+YearPercentage.textOpacity = (1); 
 YearPercentage.leftAlignText(); //AlignText,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
 
 // Year slogan in stack
 // 年进度标语
-const YearSlogan = hStack0.addText(" 𝒚𝒐𝒖 𝒅𝒊𝒅 𝒚𝒐𝒖𝒓 𝒃𝒆𝒔𝒕 𝒕𝒐𝒅𝒂𝒚?!")
-YearSlogan.font = Font.regularSystemFont(14) //font and size,字体与大小
-YearSlogan.textColor = new Color('#8675a9') //font color,字体颜色
-YearSlogan.textOpacity = (1); //opacity,不透明度
+const YearSlogan = hStack0.addText(YearProgressText)
+YearSlogan.font = YearProgressText2Font 
+YearSlogan.textColor = new Color(YearProgressColor) 
+YearSlogan.textOpacity = (YearProgressTextOpacity);
 YearSlogan.leftAlignText(); //AlignText,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
 
 
 // Spacing between yearprogress and battery
 // 年进度与电量行间距
-widgetHello.addSpacer(5);
+widgetHello.addSpacer(HSpacer);
 
 // define horizontal stack
 // 创建一个stack，使下面组件都在同一个stack中，布局为横向布局（hStack1）
@@ -478,194 +579,159 @@ let hStack1 = widgetHello.addStack();
 hStack1.layoutHorizontally();
 
 // Centers line
-hStack1.addSpacer(10); //Left spacing,向左对齐间距
+hStack1.addSpacer(LeftSpacer); //Left spacing,向左对齐间距
 
 // Battery icon in stack
 // 电量图标、标签、颜色
-const batteryicon = hStack1.addText("⚡ 电能");
-batteryicon.font = Font.regularSystemFont(12); //font and size,字体与大小
-if(Device.isCharging() && Device.batteryLevel() < 1){
-  batteryicon.textColor = new Color('008891'); //font color,充电状态字体颜色
+const batteryicon = hStack1.addText(BatteryText12);
+batteryicon.font = BatteryTextFont;
+if(Device.isCharging() && Device.batteryLevel()  < 1){
+  	batteryicon.textColor = new Color(ChargingColor); //font color,充电状态字体颜色
+} if(Device.isCharging() && Device.batteryLevel() >= 1 || Device.isFullyCharged()){
+  	batteryicon.textColor = new Color(FullyChargedColor); //font color,满电提示字体颜色
+} else if(Device.batteryLevel() >= 0.8 && Device.batteryLevel() <= 1 &&  !Device.isCharging()){
+  	batteryicon.textColor = new Color(AdequateColor); //font color,电量充足字体颜色
+} else if(Device.batteryLevel() >= 0.5 && Device.batteryLevel() < 0.8 && !Device.isCharging()){
+  	batteryicon.textColor = new Color(NormalColor); //font color,电量正常字体颜色
+} else if(Device.batteryLevel() >= 0.3 && Device.batteryLevel() < 0.5 && !Device.isCharging()){
+  	batteryicon.textColor = new Color(Low1Corl); //font color,电量偏低字体颜色
+} else if(Device.batteryLevel() >= 0.2 && Device.batteryLevel() < 0.3 && !Device.isCharging()){
+  	batteryicon.textColor = new Color(Low2Corl); //font color,电量低字体颜色
+} else if(Device.batteryLevel() >= 0 &&   Device.batteryLevel() < 0.2 && !Device.isCharging()){
+	batteryicon.textColor = new Color(ScarcityColor); //font color,电量不足字体颜色
 }
-if(Device.isCharging() && Device.batteryLevel() >= 1){
-  batteryicon.textColor = new Color('ff5f40'); //font color,满电提示字体颜色
-}
-else if(Device.batteryLevel() >= 0.8 && Device.batteryLevel() <= 1 && !Device.isCharging()){
-  batteryicon.textColor = new Color('c4fb6d'); //font color,电量充足字体颜色
-}
-else if(Device.batteryLevel() >= 0.5 && Device.batteryLevel() < 0.8 && !Device.isCharging()){
-  batteryicon.textColor = new Color('d3de32'); //font color,电量正常字体颜色
-}
-else if(Device.batteryLevel() >= 0.3 && Device.batteryLevel() < 0.5 && !Device.isCharging()){
-  batteryicon.textColor = new Color('e5df88'); //font color,电量偏低字体颜色
-}
-else if(Device.batteryLevel() >= 0.2 && Device.batteryLevel() < 0.3 && !Device.isCharging()){
-  batteryicon.textColor = new Color('ffd571'); //font color,电量低字体颜色
-}
-else if(Device.batteryLevel() >= 0 && Device.batteryLevel() < 0.2 && !Device.isCharging()){
-  batteryicon.textColor = new Color('ec0101'); //font color,电量不足字体颜色
-}
-batteryicon.textOpacity = (1); //opacity,不透明度
-batteryicon.leftAlignText(); //AlignText,对齐方式(center,left,right)
+	batteryicon.textOpacity = BatteryTextOpacity; //opacity,不透明度
+	batteryicon.leftAlignText(); //AlignText,对齐方式(center,left,right)
 
 // Battery Progress in stack
 // 电量进度条、颜色
 const batteryLine = hStack1.addText(renderBattery());
 batteryLine.font = new Font("Menlo", 12); //font and size,字体与大小
-if(Device.isCharging() && Device.batteryLevel() < 1){
-  batteryLine.textColor = new Color('008891'); //font color,充电状态字体颜色
+if(Device.isCharging() && Device.batteryLevel()  < 1){
+  	batteryLine.textColor = new Color(ChargingColor); //font color,充电状态字体颜色
+} if(Device.isCharging() && Device.batteryLevel() >= 1 || Device.isFullyCharged()){
+	batteryLine.textColor = new Color(FullyChargedColor); //font color,满电提示字体颜色
+} else if(Device.batteryLevel() >= 0.8 && Device.batteryLevel() <= 1  && !Device.isCharging()){
+  	batteryLine.textColor = new Color(AdequateColor); //font color,电量充足字体颜色
+} else if(Device.batteryLevel() >= 0.5 && Device.batteryLevel() < 0.8 && !Device.isCharging()){
+ 	batteryLine.textColor = new Color(NormalColor); //font color,电量正常字体颜色
+} else if(Device.batteryLevel() >= 0.3 && Device.batteryLevel() < 0.5 && !Device.isCharging()){
+  	batteryLine.textColor = new Color(Low1Corl); //font color,电量偏低字体颜色
+} else if(Device.batteryLevel() >= 0.2 && Device.batteryLevel() < 0.3 && !Device.isCharging()){
+  	batteryLine.textColor = new Color(Low2Corl); //font color,电量低字体颜色
+} else if(Device.batteryLevel() >= 0 &&   Device.batteryLevel() < 0.2 && !Device.isCharging()){
+  	batteryLine.textColor = new Color(ScarcityColor); //font color,电量不足字体颜色
 }
-if(Device.isCharging() && Device.batteryLevel() >= 1){
-  batteryLine.textColor = new Color('ff5f40'); //font color,满电提示字体颜色
-}
-else if(Device.batteryLevel() >= 0.8 && Device.batteryLevel() <= 1 && !Device.isCharging()){
-  batteryLine.textColor = new Color('c4fb6d'); //font color,电量充足字体颜色
-}
-else if(Device.batteryLevel() >= 0.5 && Device.batteryLevel() < 0.8 && !Device.isCharging()){
-  batteryLine.textColor = new Color('d3de32'); //font color,电量正常字体颜色
-}
-else if(Device.batteryLevel() >= 0.3 && Device.batteryLevel() < 0.5 && !Device.isCharging()){
-  batteryLine.textColor = new Color('e5df88'); //font color,电量偏低字体颜色
-}
-else if(Device.batteryLevel() >= 0.2 && Device.batteryLevel() < 0.3 && !Device.isCharging()){
-  batteryLine.textColor = new Color('ffd571'); //font color,电量低字体颜色
-}
-else if(Device.batteryLevel() >= 0 && Device.batteryLevel() < 0.2 && !Device.isCharging()){
-  batteryLine.textColor = new Color('ec0101'); //font color,电量不足字体颜色
-}
-batteryLine.textOpacity = (1);//opacity,不透明度
-batteryLine.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
+	batteryLine.textOpacity = BatteryTextOpacity;//opacity,不透明度	
+	batteryLine.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
 
 // Battery Status in stack
 // 电量状态、提示语
 var battery =  getBatteryLevel();
-if(Device.isCharging() && Device.batteryLevel() < 1){
-  battery = battery + " ⚡";
-}
-if(Device.isCharging() && Device.batteryLevel() >= 1){
-  battery = battery + " ⚡ 已充满电!请拔下电源!";
-}
-else if(Device.batteryLevel() > 0.8 && Device.batteryLevel() <= 1 && !Device.isCharging()){
-  battery = battery + " 电量充足,很有安全感!";
-}
-else if(Device.batteryLevel() >= 0.7 && Device.batteryLevel() < 0.8){
-  battery = battery + " 电量充足,不出远门没有问题!";
-}
-else if(Device.batteryLevel() >= 0.6 && Device.batteryLevel() < 0.7){
-  battery = battery + " 电量还有大半呢,不用着急充电!";
-}
-else if(Device.batteryLevel() >= 0.5 && Device.batteryLevel() < 0.6){
-  battery = battery + " 电量用了不到一半,不着急充电!";
-}
-else if(Device.batteryLevel() >= 0.4 && Device.batteryLevel() < 0.5 && !Device.isCharging()){
-  battery = battery + " 电量用了一半,有时间就充电啦!";
-}
-else if(Device.batteryLevel() >= 0.4 && Device.batteryLevel() < 0.5 && Device.isCharging()){
-	battery = battery + " 正在充入电能中...";
-  }
-else if(Device.batteryLevel() >= 0.3 && Device.batteryLevel() < 0.4 && !Device.isCharging()){
-  battery = battery + " 电量用了大半了,尽快充电啦!";
-}
-else if(Device.batteryLevel() >= 0.3 && Device.batteryLevel() < 0.4 && Device.isCharging()){
-	battery = battery + " 正在充入电能中...";
-  }
-else if(Device.batteryLevel() >= 0.2 && Device.batteryLevel() < 0.3 && !Device.isCharging()){
-  battery = battery + " 电量很快用完,赶紧充电啦!";
-}
-else if(Device.batteryLevel() >= 0.2 && Device.batteryLevel() < 0.3 && Device.isCharging()){
-	battery = battery + " 正在快速充入电能中...";
-  }
-else if(Device.batteryLevel() >= 0.1 && Device.batteryLevel() < 0.2 && !Device.isCharging()){
-  battery = battery + " 电量就剩不到20%了,尽快充电!";
-}
-else if(Device.batteryLevel() >= 0.1 && Device.batteryLevel() < 0.2 && Device.isCharging()){
-	battery = battery + " 正在快速充入电能中...";
-  }
-else if(Device.batteryLevel() <= 0.1 && !Device.isCharging()){
-  battery = battery + " 电量将耗尽,再不充电我就关机了!";
-}
-else if(Device.batteryLevel() <= 0.1 && Device.isCharging()){
-	battery = battery + " 正在快速充入电能中...";
+if(Device.isCharging() && Device.batteryLevel() < 0 &&  Device.batteryLevel() >=0.4){
+	battery = battery + BatteryText0;
+} if(Device.isCharging() && Device.batteryLevel() < 1 &&  Device.batteryLevel() >=0.5){
+  	battery = battery + BatteryText10;
+} if(Device.isCharging() && Device.batteryLevel() >= 1 || Device.isFullyCharged()){
+  	battery = battery + BatteryText1;
+} else if(Device.batteryLevel() > 0.8 && Device.batteryLevel() <= 1 && !Device.isCharging()){
+ 	battery = battery + BatteryText2;
+} else if(Device.batteryLevel() >= 0.7 && Device.batteryLevel() < 0.8){
+ 	battery = battery + BatteryText3;
+} else if(Device.batteryLevel() >= 0.5 && Device.batteryLevel() < 0.7){
+ 	battery = battery + BatteryText4;
+} else if(Device.batteryLevel() >= 0.4 && Device.batteryLevel() < 0.5 && !Device.isCharging()){
+ 	battery = battery + BatteryText5;
+} else if(Device.batteryLevel() >= 0.4 && Device.batteryLevel() < 0.5 &&  Device.isCharging()){
+	battery = battery + BatteryText11;
+} else if(Device.batteryLevel() >= 0.3 && Device.batteryLevel() < 0.4 && !Device.isCharging()){
+ 	battery = battery + BatteryText6;
+} else if(Device.batteryLevel() >= 0.3 && Device.batteryLevel() < 0.4 &&  Device.isCharging()){
+ 	battery = battery + BatteryText11;
+} else if(Device.batteryLevel() >= 0.2 && Device.batteryLevel() < 0.3 && !Device.isCharging()){
+	battery = battery + BatteryText7;
+} else if(Device.batteryLevel() >= 0.2 && Device.batteryLevel() < 0.3 &&  Device.isCharging()){
+	battery = battery + BatteryText11;
+} else if(Device.batteryLevel() >= 0.1 && Device.batteryLevel() < 0.2 && !Device.isCharging()){
+  	battery = battery + BatteryText8;
+} else if(Device.batteryLevel() >= 0.1 && Device.batteryLevel() < 0.2 &&  Device.isCharging()){
+	battery = battery + BatteryText11;
+} else if(Device.batteryLevel() <= 0.1 && !Device.isCharging()){
+ 	battery = battery + BatteryText9;
+} else if(Device.batteryLevel() <= 0.1 &&  Device.isCharging()){
+	battery = battery + BatteryText11;
 }
 // Battery Status Color
 // 电量状态颜色
 let batterytext = hStack1.addText(battery);
-batterytext.font = Font.regularSystemFont(12); //font and size,字体与大小
+batterytext.font = BatteryTextFont; //font and size,字体与大小
 if(Device.isCharging() && Device.batteryLevel() < 1){
-  batterytext.textColor = new Color('008891'); //font color,充电状态字体颜色
+	batterytext.textColor = new Color(ChargingColor); //font color,充电状态字体颜色
+} if(Device.isCharging() && Device.batteryLevel() >= 1 || Device.isFullyCharged()){
+  	batterytext.textColor = new Color(FullyChargedColor); //font color,满电提示字体颜色
+} else if(Device.batteryLevel() >= 0.8 && Device.batteryLevel() <= 1 && !Device.isCharging()){
+  	batterytext.textColor = new Color(AdequateColor); //font color,电量充足字体颜色
+} else if(Device.batteryLevel() >= 0.5 && Device.batteryLevel() < 0.8 && !Device.isCharging()){
+  	batterytext.textColor = new Color(NormalColor); //font color,电量正常字体颜色
+} else if(Device.batteryLevel() >= 0.3 && Device.batteryLevel() < 0.5 && !Device.isCharging()){
+  	batterytext.textColor = new Color(Low1Corl); //font color,电量偏低字体颜色
+} else if(Device.batteryLevel() >= 0.2 && Device.batteryLevel() < 0.3 && !Device.isCharging()){
+  	batterytext.textColor = new Color(Low2Corl); //font color,电量低字体颜色
+} else if(Device.batteryLevel() >= 0 && Device.batteryLevel() < 0.2 && !Device.isCharging()){
+	batterytext.textColor = new Color(ScarcityColor); //font color,电量不足字体颜色
 }
-if(Device.isCharging() && Device.batteryLevel() >= 1){
-  batterytext.textColor = new Color('ff5f40'); //font color,满电提示字体颜色
-}
-else if(Device.batteryLevel() >= 0.8 && Device.batteryLevel() <= 1 && !Device.isCharging()){
-  batterytext.textColor = new Color('c4fb6d'); //font color,电量充足字体颜色
-}
-else if(Device.batteryLevel() >= 0.5 && Device.batteryLevel() < 0.8 && !Device.isCharging()){
-  batterytext.textColor = new Color('d3de32'); //font color,电量正常字体颜色
-}
-else if(Device.batteryLevel() >= 0.3 && Device.batteryLevel() < 0.5 && !Device.isCharging()){
-  batterytext.textColor = new Color('e5df88'); //font color,电量偏低字体颜色
-}
-else if(Device.batteryLevel() >= 0.2 && Device.batteryLevel() < 0.3 && !Device.isCharging()){
-  batterytext.textColor = new Color('ffd571'); //font color,电量低字体颜色
-}
-else if(Device.batteryLevel() >= 0 && Device.batteryLevel() < 0.2 && !Device.isCharging()){
-  batterytext.textColor = new Color('ec0101'); //font color,电量不足字体颜色
-}
-batterytext.textOpacity = (1); //opacity,不透明度
-batterytext.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
+	batterytext.textOpacity = BatteryTextOpacity; //opacity,不透明度
+	batterytext.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
 
 // Spacing between battery and summary
 // 电量与天气、日期之间的间距
-widgetHello.addSpacer(5);
+widgetHello.addSpacer(HSpacer);
 
 // define horizontal stack
 // 创建一个stack，使下面组件都在同一个stack中，布局为横向布局（hStack2）
 let hStack2 = widgetHello.addStack();
-hStack2.layoutHorizontally();
+	hStack2.layoutHorizontally();
 
 // Centers line
-hStack2.addSpacer(10);//Left spacing,向左对齐间距
-
+hStack2.addSpacer(LeftSpacer);
 // Widget feel temp
 // 天气简报（最高温度与最低温度）
 const feeltext =hStack2.addText(weathername + " 𝙩𝙤𝙙𝙖𝙮" + "." + " 𝙄𝙩 𝙛𝙚𝙚𝙡𝙨 𝙡𝙞𝙠𝙚 " + Math.round(feel_like) + UNITS + ";" + " 𝙩𝙝𝙚 𝙝𝙞𝙜𝙝 𝙬𝙞𝙡𝙡 𝙗𝙚 " + Math.round(highTemp) + UNITS);
-feeltext.font = Font.regularSystemFont(12); //font and size,字体与大小
-feeltext.textColor = new Color('#51adcf'); //font color,字体颜色
-feeltext.textOpacity = (0.7); //opacity,不透明度
-feeltext.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
-
+	  feeltext.font = FeelTextFont; 
+	  feeltext.textColor = new Color(FellTextColor);
+	  feeltext.textOpacity = FellTextOpacity; 
+	  feeltext.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
 
 // define horizontal stack
 // 创建一个stack，使下面组件都在同一个stack中，布局为横向布局（hStack2）
 let hStack3 = widgetHello.addStack();
-hStack3.layoutHorizontally();
+	hStack3.layoutHorizontally();
 
 // Centers line
-hStack3.addSpacer(10);//Left spacing,向左对齐间距
+hStack3.addSpacer(LeftSpacer);//Left spacing,向左对齐间距
 
 // Date label
 // 日期
 const datetext = hStack3.addText(datefull + "  ");
-datetext.font = Font.regularSystemFont(30); //font and size,字体与大小
-datetext.textColor = new Color('#ffffff'); //font color,字体颜色
-datetext.textOpacity = (0.8); //opacity,不透明度
-datetext.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
+	  datetext.font = DateTextFont; 
+	  datetext.textColor = new Color(DateTextColor); 
+	  datetext.textOpacity = DateTextOpacity; 
+	  datetext.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
 
 // Weather icons in stack
 // 天气图标
 var img = Image.fromFile(await fetchimagelocal(iconData + "_ico"));
 let widgetimg = hStack3.addImage(img); 
-widgetimg.imageSize = new Size(40, 40); //image size,图像大小
-widgetimg.leftAlignImage(); //Align,对齐方式(center,left,right)
+	widgetimg.imageSize = iconsSize; 
+	widgetimg.leftAlignImage(); //Align,对齐方式(center,left,right)
 
 // tempeture label in stack
 // 温度
-let temptext = hStack3.addText('\xa0\xa0'+ Math.round(curTemp).toString()+UNITS);
-temptext.font = Font.boldSystemFont(30); //font and size,字体与大小
-temptext.textColor = new Color('#0278ae'); //font color,字体颜色
-temptext.textOpacity = (1); //opacity,不透明度
-temptext.leftAlignText(); //AlignText,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
+let temptext = hStack3.addText(Math.round(curTemp).toString()+UNITS);
+	temptext.font = TempTextFont; 
+	temptext.textColor = new Color(TempTextColor); 
+	temptext.textOpacity = TempTextOpacity; 
+	temptext.leftAlignText(); //AlignText,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
 
 // Bottom Spacer
 // 底部间距
@@ -795,7 +861,8 @@ function cropImage(img,rect) {
 // Pixel sizes and positions for widgets on all supported phones.
 // 所有支持的手机上小部件的像素大小和位置。
 function phoneSizes() {
-  let phones = {	
+  let phones = {
+	// iPhone Xs Max \ iPhone 11 Pro Max	
 	"2688": {
 			"small":  507,
 			"medium": 1080,
@@ -806,7 +873,7 @@ function phoneSizes() {
 			"middle": 858,
 			"bottom": 1488
 	},
-	
+	// iPhone Xr \ iPhone 11
 	"1792": {
 			"small":  338,
 			"medium": 720,
@@ -817,9 +884,9 @@ function phoneSizes() {
 			"middle": 580,
 			"bottom": 1000
 	},
-	
+	// iPhone X/XS \ iPhone 11 Pro
 	"2436": {
-			"small":  465,
+			"small":  465, 
 			"medium": 987,
 			"large":  1035,
 			"left":  69,
@@ -828,7 +895,7 @@ function phoneSizes() {
 			"middle": 783,
 			"bottom": 1353
 	},
-	
+	// iPhone 6P/7P/8P 
 	"2208": {
 			"small":  471,
 			"medium": 1044,
@@ -839,7 +906,7 @@ function phoneSizes() {
 			"middle": 696,
 			"bottom": 1278
 	},
-	
+	// iPhone 6\7\8\SE(4.7)
 	"1334": {
 			"small":  296,
 			"medium": 642,
@@ -850,7 +917,7 @@ function phoneSizes() {
 			"middle": 412,
 			"bottom": 764
 	},
-	
+	// iPhone SE \ iPod Touch 5th generation and later
 	"1136": {
 			"small":  282,
 			"medium": 584,
@@ -861,6 +928,7 @@ function phoneSizes() {
 			"middle": 399,
 			"bottom": 399
 	},
+	// iPhone Xr 特别版
         "1624": {
                         "small": 310,
                         "medium": 658,
