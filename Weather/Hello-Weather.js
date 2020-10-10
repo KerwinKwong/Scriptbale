@@ -67,8 +67,7 @@ let BatteryText6   = " 电量用了大半了,尽快充电啦!" //当电量在30-
 let BatteryText7   = " 电量就快用完,赶紧充电!" //当电量在20-30%
 let BatteryText8   = " 电量就剩不到20%了,尽快充电!" //当电量在10-20%
 let BatteryText9   = " 电量将耗尽,再不充电我就关机了!" //当电量少于10%
-let BatteryText10  = " ⚡ 充电中..." //当电量在>= 50% <100%,并在充电中
-let BatteryText11  = " 正在充入电能中..." //当电量在 < 50%
+let BatteryText10  = " 正在充入电能中..." //当电量在 < 50%
 let BatteryText12  = "电能"
 
 // 电量提示语字体大小设置
@@ -852,10 +851,8 @@ if(Device.isCharging() && Device.batteryLevel()  < 1){
 // Battery Status in stack
 // 电量状态、提示语
 var battery =  getBatteryLevel();
-if(Device.isCharging() && Device.batteryLevel() < 0 &&  Device.batteryLevel() >=0.4){
+if(Device.isCharging() && Device.batteryLevel() < 1 ){
 	battery = battery + BatteryText0;
-} if(Device.isCharging() && Device.batteryLevel() < 1 &&  Device.batteryLevel() >=0.5){
-  	battery = battery + BatteryText10;
 } if(Device.isCharging() && Device.batteryLevel() >= 1 || Device.isFullyCharged()){
   	battery = battery + BatteryText1;
 } else if(Device.batteryLevel() > 0.8 && Device.batteryLevel() <= 1 && !Device.isCharging()){
@@ -867,23 +864,23 @@ if(Device.isCharging() && Device.batteryLevel() < 0 &&  Device.batteryLevel() >=
 } else if(Device.batteryLevel() >= 0.4 && Device.batteryLevel() < 0.5 && !Device.isCharging()){
  	battery = battery + BatteryText5;
 } else if(Device.batteryLevel() >= 0.4 && Device.batteryLevel() < 0.5 &&  Device.isCharging()){
-	battery = battery + BatteryText11;
+	battery = battery + BatteryText10;
 } else if(Device.batteryLevel() >= 0.3 && Device.batteryLevel() < 0.4 && !Device.isCharging()){
  	battery = battery + BatteryText6;
 } else if(Device.batteryLevel() >= 0.3 && Device.batteryLevel() < 0.4 &&  Device.isCharging()){
- 	battery = battery + BatteryText11;
+ 	battery = battery + BatteryText10;
 } else if(Device.batteryLevel() >= 0.2 && Device.batteryLevel() < 0.3 && !Device.isCharging()){
 	battery = battery + BatteryText7;
 } else if(Device.batteryLevel() >= 0.2 && Device.batteryLevel() < 0.3 &&  Device.isCharging()){
-	battery = battery + BatteryText11;
+	battery = battery + BatteryText10;
 } else if(Device.batteryLevel() >= 0.1 && Device.batteryLevel() < 0.2 && !Device.isCharging()){
   	battery = battery + BatteryText8;
 } else if(Device.batteryLevel() >= 0.1 && Device.batteryLevel() < 0.2 &&  Device.isCharging()){
-	battery = battery + BatteryText11;
+	battery = battery + BatteryText10;
 } else if(Device.batteryLevel() <= 0.1 && !Device.isCharging()){
  	battery = battery + BatteryText9;
 } else if(Device.batteryLevel() <= 0.1 &&  Device.isCharging()){
-	battery = battery + BatteryText11;
+	battery = battery + BatteryText10;
 }
 // Battery Status Color
 // 电量状态颜色
