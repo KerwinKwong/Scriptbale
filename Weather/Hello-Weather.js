@@ -732,6 +732,10 @@ let temptext = helloStack.addText(Math.round(curTemp).toString()+UNITS);
 	temptext.textOpacity = TempTextOpacity; 
   //temptext.leftAlignText(); // 对齐设置,在Stack上无效
 
+// Spacing between tempt and feel
+// 温度与天气简报行之间的间距
+widgetHello.addSpacer(HSpacer);
+
 // define horizontal stack
 // 创建一个stack，使下面组件都在同一个stack中，布局为横向布局（hStack2）
 let fellStack = widgetHello.addStack();
@@ -747,8 +751,8 @@ const feeltext =fellStack.addText(weathername + " today" + "." + " It feel like 
 	  feeltext.textOpacity = FellTextOpacity; 
 	//feeltext.leftAlignText(); // 对齐设置,在Stack上无效
 
-// Spacing between greeting and yearprogress
-// 问候标签与年进度行之间的间距
+// Spacing between feel and yearprogress
+// 天气简报与年进度行之间的间距
 widgetHello.addSpacer(HSpacer);
 
 // define horizontal stack
