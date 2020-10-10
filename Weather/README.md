@@ -14,6 +14,7 @@
 	let CITY_WEATHER = "XXXXXX";//add your city ID
 ```
 3.下载`Hello-Weather.js`到Scriptable
+
 4.点击运行脚本，根据提示操作即可。
 
 
