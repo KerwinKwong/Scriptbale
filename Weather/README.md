@@ -13,7 +13,7 @@
 	let API_WEATHER = "XXXXXXXXXXXXXXXX";//Load Your api here
 	let CITY_WEATHER = "XXXXXX";//add your city ID
 ```
-3.下载`Hello-Weather.js`到Scriptable
+3.下载`Hello-Weather.js`到Scriptable/复制全部代码到你的Scriptable，新建一个Script，粘贴（代码是这个[点击这里](https://raw.githubusercontent.com/xkerwin/Scriptbale/main/Weather/Hello-Weather.js)）
 
 4.点击运行脚本，根据提示操作即可。
 
