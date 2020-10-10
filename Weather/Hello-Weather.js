@@ -16,7 +16,12 @@
  * 4、简化了配置参数修改，让普通用户更方便自定义
  * 5、增加农历显示
 */
-/*
+
+/*========================================
+ ***************以下是设置部分***************
+ ========================================*/ 
+
+ /*
  * Spacer set
  * 间距设置
  * ==========
@@ -87,9 +92,15 @@ let YearProgressText         = " 𝒚𝒐𝒖 𝒅𝒊𝒅 𝒚𝒐𝒖𝒓 𝒃
  * ================
  * 
 */
-let DateTextFont     = Font.regularSystemFont(18) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
-let DateTextColor    = "ffffff" //字体颜色
-let DateTextOpacity  = (0.8) //字体不透明度
+// 公历日期字体、颜色设置
+let DateTextFont            = Font.regularSystemFont(18) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+let DateTextColor           = "ffffff" //字体颜色
+let DateTextOpacity         = (0.9) //字体不透明度
+
+// 农历日期字体、颜色设置
+let LunarDateTextFont       = new Font("Menlo", 18) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+let LunarDateTextColor      = "ffffff" //字体颜色
+let LunarDateTextOpacity    = (0.9) //字体不透明度
 
 /*
  * WEATHER set
@@ -123,6 +134,10 @@ let TempTextFont = Font.regularSystemFont(25) //如果使用非系统字体请�
 let TempTextColor = "ffffff" //字体颜色
 let TempTextOpacity = (1) //字体不透明度
 let iconsSize = new Size(30, 30) //天气图标尺寸大小
+
+/*========================================
+ ***************以下是参数部分***************
+ ========================================*/ 
 
 const filename = Script.name() + ".jpg"
 const files = FileManager.local()
@@ -588,9 +603,9 @@ function ordinalSuffix(input) {
 }
 // Generate date string.
 // 日期生成格式顺序。
-var Datefull = month + ordinalSuffix(date) +", " + weekday;
+var Datefull = month + ordinalSuffix(date) +"｜" + weekday;
 var lunarDate = sloarToLunar(today.getFullYear(), today.getMonth() + 1, today.getDate())
-let Lunar = lunarDate['lunarYear']+" "+lunarDate['lunarMonth']+lunarDate['lunarDay']
+let Lunar = lunarDate['lunarYear']+lunarDate['lunarMonth']+lunarDate['lunarDay']
 
 // Support for multiple greetings per time period.
 // 支持每个时间段的多个问候。
@@ -673,25 +688,15 @@ function renderYear() {
   return yearProgress;
 }
 
-// Try/catch for color input parameter
-// 尝试获取输入的颜色参数
-try {
-	inputArr[0].toString();
-} catch(e) {
-	throw new Error("Please long press the widget and add a parameter.");
-}
-let themeColor = new Color(inputArr[0].toString());
 if (config.runsInWidget) {
   let widget = new ListWidget()
   widget.backgroundImage = files.readImage(path)
   
-/* You can your own code here to add additional items to the "invisible" background of the widget.
- * 您可以在此处编写自己的代码，以将其他项目添加到小部件。
- * ---------------
- * Assemble Widget 
- * --------------- 
- *Script.setWidget(widget)
- */
+/*========================================
+ ***************以下是小组件部分*************
+ *****你可以添加其他小组件以显示在Widgets上****
+ ========================================*/ 
+
  
 // Top spacing
 // 顶部间距
@@ -700,7 +705,7 @@ widgetHello.addSpacer(TopSpacer);
 // define horizontal stack
 // 创建一个stack，使下面组件都在同一个stack中，布局为横向布局（helloStack）
 let helloStack = widgetHello.addStack();
-helloStack.layoutHorizontally();
+	helloStack.layoutHorizontally();
 
 // Centers line
 helloStack.addSpacer(LeftSpacer); //Left spacing,向左对齐间距
@@ -708,17 +713,17 @@ helloStack.addSpacer(LeftSpacer); //Left spacing,向左对齐间距
 // Greeting label
 // 问候标签
 const hello = helloStack.addText(greeting + "  ");
-	  hello.font = HelloFont; //font and size,字体与大小
-	  hello.textColor = new Color(HelloColor); //font color,字体颜色
-	  hello.textOpacity = HelloOpacity; //opacity,不透明度
-	  hello.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
+	  hello.font = HelloFont; 
+	  hello.textColor = new Color(HelloColor); 
+	  hello.textOpacity = HelloOpacity; 
+	//hello.leftAlignText(); // 对齐设置,在Stack上无效
 
 // Weather icons in stack
 // 天气图标
 var img = Image.fromFile(await fetchimagelocal(iconData + "_ico"));
 const widgetimg = helloStack.addImage(img); 
 	  widgetimg.imageSize = iconsSize; 
-	  widgetimg.leftAlignImage(); //Align,对齐方式(center,left,right)
+	//widgetimg.leftAlignImage(); // 对齐设置,在Stack上无效
 
 // tempeture label in stack
 // 温度
@@ -726,7 +731,7 @@ let temptext = helloStack.addText(Math.round(curTemp).toString()+UNITS);
 	temptext.font = TempTextFont; 
 	temptext.textColor = new Color(TempTextColor); 
 	temptext.textOpacity = TempTextOpacity; 
-	temptext.leftAlignText(); //AlignText,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
+  //temptext.leftAlignText(); // 对齐设置,在Stack上无效
 
 // define horizontal stack
 // 创建一个stack，使下面组件都在同一个stack中，布局为横向布局（hStack2）
@@ -741,7 +746,7 @@ const feeltext =fellStack.addText(weathername + " today" + "." + " It feel like 
 	  feeltext.font = FeelTextFont; 
 	  feeltext.textColor = new Color(FellTextColor);
 	  feeltext.textOpacity = FellTextOpacity; 
-	  feeltext.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
+	//feeltext.leftAlignText(); // 对齐设置,在Stack上无效
 
 // Spacing between greeting and yearprogress
 // 问候标签与年进度行之间的间距
@@ -750,7 +755,7 @@ widgetHello.addSpacer(HSpacer);
 // define horizontal stack
 // 创建一个stack，使下面组件都在同一个stack中，布局为横向布局（hStack0）
 let yearStack = widgetHello.addStack();
-yearStack.layoutHorizontally();
+	yearStack.layoutHorizontally();
 
 // Centers line
 yearStack.addSpacer(LeftSpacer); //Left spacing,向左对齐间距
@@ -758,34 +763,34 @@ yearStack.addSpacer(LeftSpacer); //Left spacing,向左对齐间距
 // Year icon in stack
 // 年进度图标
 const YearProgressicon = yearStack.addText(Yearicons)
-YearProgressicon.font = YearProgressText1Font //font and size,字体与大小
-YearProgressicon.textColor = new Color(YearProgressColor) //font color,字体颜色
-YearProgressicon.textOpacity = YearProgressTextOpacity; //opacity,不透明度
-YearProgressicon.leftAlignText(); //AlignText,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
+	  YearProgressicon.font = YearProgressText1Font //font and size,字体与大小
+	  YearProgressicon.textColor = new Color(YearProgressColor) //font color,字体颜色
+	  YearProgressicon.textOpacity = YearProgressTextOpacity; //opacity,不透明度
+	//YearProgressicon.leftAlignText(); // 对齐设置,在Stack上无效
 
 // Year label in stack
 // 年进度条、标签
 const YearProgress = yearStack.addText(renderYear())
-YearProgress.font = new Font('Menlo', 12) //font and size,字体与大小
-YearProgress.textColor = new Color(YearProgressColor) //font color,字体颜色
-YearProgress.textOpacity = YearProgressTextOpacity; 
-YearProgress.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
+	  YearProgress.font = new Font('Menlo', 12) //font and size,字体与大小
+	  YearProgress.textColor = new Color(YearProgressColor) //font color,字体颜色
+	  YearProgress.textOpacity = YearProgressTextOpacity; 
+	//YearProgress.leftAlignText();// 对齐设置,在Stack上无效
 
 // Year percent in stack
 // 年进度百分比
 const YearPercentage = yearStack.addText(getYearProgress())
-YearPercentage.font = YearProgressText1Font 
-YearPercentage.textColor = new Color(YearProgressColor) 
-YearPercentage.textOpacity = (1); 
-YearPercentage.leftAlignText(); //AlignText,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
+	  YearPercentage.font = YearProgressText1Font 
+	  YearPercentage.textColor = new Color(YearProgressColor) 
+	  YearPercentage.textOpacity = (1); 
+	//YearPercentage.leftAlignText(); // 对齐设置,在Stack上无效
 
 // Year slogan in stack
 // 年进度标语
 const YearSlogan = yearStack.addText(YearProgressText)
-YearSlogan.font = YearProgressText2Font 
-YearSlogan.textColor = new Color(YearProgressColor) 
-YearSlogan.textOpacity = (YearProgressTextOpacity);
-YearSlogan.leftAlignText(); //AlignText,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
+	  YearSlogan.font = YearProgressText2Font 
+	  YearSlogan.textColor = new Color(YearProgressColor) 
+	  YearSlogan.textOpacity = (YearProgressTextOpacity);
+	//YearSlogan.leftAlignText(); // 对齐设置,在Stack上无效
 
 
 // Spacing between yearprogress and battery
@@ -795,7 +800,7 @@ widgetHello.addSpacer(HSpacer);
 // define horizontal stack
 // 创建一个stack，使下面组件都在同一个stack中，布局为横向布局（hStack1）
 let batteryStack = widgetHello.addStack();
-batteryStack.layoutHorizontally();
+	batteryStack.layoutHorizontally();
 
 // Centers line
 batteryStack.addSpacer(LeftSpacer); //Left spacing,向左对齐间距
@@ -803,7 +808,7 @@ batteryStack.addSpacer(LeftSpacer); //Left spacing,向左对齐间距
 // Battery icon in stack
 // 电量图标、标签、颜色
 const batteryicon = batteryStack.addText(BatteryText12);
-batteryicon.font = BatteryTextFont;
+	batteryicon.font = BatteryTextFont;
 if(Device.isCharging() && Device.batteryLevel()  < 1){
   	batteryicon.textColor = new Color(ChargingColor); //font color,充电状态字体颜色
 } if(Device.isCharging() && Device.batteryLevel() >= 1 || Device.isFullyCharged()){
@@ -825,7 +830,7 @@ if(Device.isCharging() && Device.batteryLevel()  < 1){
 // Battery Progress in stack
 // 电量进度条、颜色
 const batteryLine = batteryStack.addText(renderBattery());
-batteryLine.font = new Font("Menlo", 12); //font and size,字体与大小
+	batteryLine.font = new Font("Menlo", 12); //font and size,字体与大小
 if(Device.isCharging() && Device.batteryLevel()  < 1){
   	batteryLine.textColor = new Color(ChargingColor); //font color,充电状态字体颜色
 } if(Device.isCharging() && Device.batteryLevel() >= 1 || Device.isFullyCharged()){
@@ -841,8 +846,8 @@ if(Device.isCharging() && Device.batteryLevel()  < 1){
 } else if(Device.batteryLevel() >= 0 &&   Device.batteryLevel() < 0.2 && !Device.isCharging()){
   	batteryLine.textColor = new Color(ScarcityColor); //font color,电量不足字体颜色
 }
-	batteryLine.textOpacity = BatteryTextOpacity;//opacity,不透明度	
-	batteryLine.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
+	batteryLine.textOpacity = BatteryTextOpacity;
+	//batteryLine.leftAlignText(); // 对齐设置,在Stack上无效
 
 // Battery Status in stack
 // 电量状态、提示语
@@ -883,7 +888,7 @@ if(Device.isCharging() && Device.batteryLevel() < 0 &&  Device.batteryLevel() >=
 // Battery Status Color
 // 电量状态颜色
 let batterytext = batteryStack.addText(battery);
-batterytext.font = BatteryTextFont; //font and size,字体与大小
+	batterytext.font = BatteryTextFont; //font and size,字体与大小
 if(Device.isCharging() && Device.batteryLevel() < 1){
 	batterytext.textColor = new Color(ChargingColor); //font color,充电状态字体颜色
 } if(Device.isCharging() && Device.batteryLevel() >= 1 || Device.isFullyCharged()){
@@ -917,7 +922,7 @@ dateStack.addSpacer(LeftSpacer);//Left spacing,向左对齐间距
 
 // Date label
 // 日期
-const datetext = dateStack.addText("📅 "+Datefull + "  ");
+const datetext = dateStack.addText("📅 "+Datefull + " ");
 	  datetext.font = DateTextFont; 
 	  datetext.textColor = new Color(DateTextColor); 
 	  datetext.textOpacity = DateTextOpacity; 
@@ -925,33 +930,31 @@ const datetext = dateStack.addText("📅 "+Datefull + "  ");
 
 // 农历
 const lunarDateText = dateStack.addText(Lunar);
-	  lunarDateText.font = DateTextFont; //font and size,字体与大小
-	  lunarDateText.textColor = new Color(DateTextColor); //font color,字体颜色
-	  lunarDateText.textOpacity = DateTextOpacity; //opacity,不透明度
+	  lunarDateText.font = LunarDateTextFont; //font and size,字体与大小
+	  lunarDateText.textColor = new Color(LunarDateTextColor); //font color,字体颜色
+	  lunarDateText.textOpacity = LunarDateTextOpacity; //opacity,不透明度
 	  lunarDateText.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
 
 // Bottom Spacer
 // 底部间距
  widgetHello.addSpacer();
- widgetHello.setPadding( 0, 0, 0, 0)
+ widgetHello.setPadding( 0, 0, 0, 0); //设置全局位置
  widgetHello.backgroundImage = widget.backgroundImage
  Script.setWidget(widgetHello)
 
 //Script.complete()
 
 
-/*
- * The code below this comment is used to set up the invisible widget.
- * 以下的代码用于设置小组件的 "透明背景"
- * ===================================================================
- */
+/*==============================================
+ ************以下是小组件透明背景生成脚本************
+ =============================================*/ 
 } else {
   
   // Determine if user has taken the screenshot.
   // 确定用户是否有了屏幕截图。
   var message
-  message = "开始之前，请返回主屏幕并长按进入编辑模式。滑动到最右边的空白页并截图。"
-  let exitOptions = ["继续","退出以截图"]
+  message = "以下是【透明背景】生成步骤，如果你没有屏幕截图请退出，并返回主屏幕长按进入编辑模式。滑动到最右边的空白页截图。然后重新运行！"
+  let exitOptions = ["继续(已有截图)","退出(没有截图)"]
   let shouldExit = await generateAlert(message,exitOptions)
   if (shouldExit) return
   
@@ -961,8 +964,8 @@ const lunarDateText = dateStack.addText(Lunar);
   let height = img.size.height
   let phone = phoneSizes()[height]
   if (!phone) {
-    message = "您似乎选择了非iPhone屏幕截图的图像，或者不支持您的iPhone。请使用其他图像再试一次。"
-    await generateAlert(message,["OK"])
+    message = "您似乎选择了非iPhone屏幕截图的图像，或者不支持您的iPhone。请使用其他图像再试一次!"
+    await generateAlert(message,["好的！我现在去截图"])
     return
   }
   
