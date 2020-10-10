@@ -129,7 +129,7 @@ let BatteryTextOpacity = (1); //字体不透明度0-1,0.5=半透明
 */
 let YearProgressText1Font    = Font.regularSystemFont(12); //进度条字体,如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
 let YearProgressTextOpacity = (1); //字体不透明度0-1,0.5=半透明
-let YearProgressColor       = '5e5ce6' //颜色
+let YearProgressColor       = '6886c5' //颜色
 let Yearicons               = "📅 全年" //年进度图标
 let YearProgressText2Font   = Font.regularSystemFont(14); //标语字体,如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
 let YearProgressText        = " 𝒚𝒐𝒖 𝒅𝒊𝒅 𝒚𝒐𝒖𝒓 𝒃𝒆𝒔𝒕 𝒕𝒐𝒅𝒂𝒚 ?!" //年进度标语
@@ -141,7 +141,7 @@ let YearProgressText        = " 𝒚𝒐𝒖 𝒅𝒊𝒅 𝒚𝒐𝒖𝒓 𝒃�
 */
 let DateTextFont = Font.regularSystemFont(30) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
 let DateTextColor = "ffffff" //字体颜色
-let DateTextOpacity = (0.7) //字体不透明度
+let DateTextOpacity = (0.8) //字体不透明度
 
 /*
  * WEATHER set
@@ -167,8 +167,8 @@ let UNITS = "\u2103";
 
 // 最高/低温度字体、颜色设置
 let FeelTextFont = Font.regularSystemFont(12) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
-let FellTextColor = "51adcf" //字体颜色
-let FellTextOpacity = (1) //字体不透明度
+let FellTextColor = "e6e6e6" //字体颜色
+let FellTextOpacity = (0.7) //字体不透明度
 
 // 当前天气字体、颜色设置
 let TempTextFont = Font.regularSystemFont(30) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
@@ -696,7 +696,7 @@ let hStack2 = widgetHello.addStack();
 hStack2.addSpacer(LeftSpacer);
 // Widget feel temp
 // 天气简报（最高温度与最低温度）
-const feeltext =hStack2.addText(weathername + " 𝙩𝙤𝙙𝙖𝙮" + "." + " 𝙄𝙩 𝙛𝙚𝙚𝙡𝙨 𝙡𝙞𝙠𝙚 " + Math.round(feel_like) + UNITS + ";" + " 𝙩𝙝𝙚 𝙝𝙞𝙜𝙝 𝙬𝙞𝙡𝙡 𝙗𝙚 " + Math.round(highTemp) + UNITS);
+const feeltext =hStack2.addText(weathername + " today" + "." + " It feel like " + Math.round(feel_like) + UNITS + ";" + " the high will  be " + Math.round(highTemp) + UNITS);
 	  feeltext.font = FeelTextFont; 
 	  feeltext.textColor = new Color(FellTextColor);
 	  feeltext.textOpacity = FellTextOpacity; 
