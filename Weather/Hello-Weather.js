@@ -63,7 +63,7 @@ let BatteryText8   = " 电量就剩不到20%了,尽快充电!" //当电量在10-
 let BatteryText9   = " 电量将耗尽,再不充电我就关机了!" //当电量少于10%
 let BatteryText10  = " ⚡ 充电中..." //当电量在>= 50% <100%,并在充电中
 let BatteryText11  = " 正在充入电能中..." //当电量在 < 50%
-let BatteryText12  = "⚡ 电能"
+let BatteryText12  = "电能"
 
 // 电量提示语字体大小设置
 let BatteryTextFont = Font.regularSystemFont(12); //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
@@ -77,7 +77,7 @@ let BatteryTextOpacity = (1); //字体不透明度0-1,0.5=半透明
 let YearProgressText1Font    = Font.regularSystemFont(12); //进度条字体,如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
 let YearProgressTextOpacity  = (1); //字体不透明度0-1,0.5=半透明
 let YearProgressColor        = '6886c5' //颜色
-let Yearicons                = "📅 全年" //年进度图标
+let Yearicons                = "今年" //年进度图标
 let YearProgressText2Font    = Font.regularSystemFont(14); //标语字体,如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
 let YearProgressText         = " 𝒚𝒐𝒖 𝒅𝒊𝒅 𝒚𝒐𝒖𝒓 𝒃𝒆𝒔𝒕 𝒕𝒐𝒅𝒂𝒚 ?!" //年进度标语
 
@@ -916,7 +916,7 @@ dateStack.addSpacer(LeftSpacer);//Left spacing,向左对齐间距
 
 // Date label
 // 日期
-const datetext = dateStack.addText(Datefull + "  ");
+const datetext = dateStack.addText("📅 "+Datefull + "  ");
 	  datetext.font = DateTextFont; 
 	  datetext.textColor = new Color(DateTextColor); 
 	  datetext.textOpacity = DateTextOpacity; 
