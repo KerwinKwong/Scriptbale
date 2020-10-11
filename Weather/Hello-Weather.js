@@ -94,6 +94,7 @@ const YearProgressText         = " 𝒚𝒐𝒖 𝒅𝒊𝒅 𝒚𝒐𝒖𝒓 �
 // 公历日期字体、颜色设置
 const DateTextFont            = Font.regularSystemFont(18) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
 const DateTextColor           = new Color("ffffff") //字体颜色
+const sundayTextColor         = new Color("ff5f40") //字体颜色
 const DateTextOpacity         = (0.9) //字体不透明度
 
 // 农历日期字体、颜色设置
@@ -567,14 +568,19 @@ var greetingsLateNight = [
 // 节日问候语定制。
 var holidaysByKey = {
 	// month,week,day: datetext
-	"11,4,4": "Happy Thanksgiving!"
+	"11,4,4": "感恩节!!!" , //注意格式是每年的11月第四个星期四(并用逗号分开每个节日日期)
+	"5,2,7":  "母亲节!!!" ,
+	"6,3,7": "父亲节!!!"
 }
 
 var holidaysByDate = {
 	// month,date: greeting
 	"1,1": "Happy " + (today.getFullYear()).toString() + "!",
-     "10,31": "Happy Halloween!",
-	"12,25": "Merry Christmas!"
+	"2.14": "情人节",
+	"10.1": "国庆快乐!!!",
+	"10,31": "🎃万圣节!!!",
+	"11.11": "买买买节!!!",
+	"12,25": "🎄圣诞节!!!"
 }
 
 var holidayKey = (today.getMonth() + 1).toString() + "," +  (Math.ceil(today.getDate() / 7)).toString() + "," + (today.getDay()).toString();
@@ -602,7 +608,7 @@ function ordinalSuffix(input) {
 }
 // Generate date string.
 // 日期生成格式顺序。
-var Datefull = month + ordinalSuffix(date) +"｜" + weekday;
+var Datefull = month + ordinalSuffix(date) + "｜" + weekday;
 var lunarDate = sloarToLunar(today.getFullYear(), today.getMonth() + 1, today.getDate())
 let Lunar = lunarDate['lunarYear']+lunarDate['lunarMonth']+lunarDate['lunarDay']
 
@@ -856,33 +862,33 @@ if(Device.isCharging() && Device.batteryLevel()  < 1){
 // 电量状态、提示语
 var battery =  getBatteryLevel();
 if(Device.isCharging() && Device.batteryLevel() < 1 ){
-	battery = battery + BatteryText0;
+	battery = battery + BatteryText0; //充电中并且电量少于100%
 } if(Device.isCharging() && Device.batteryLevel() >= 1 || Device.isFullyCharged()){
-  	battery = battery + BatteryText1;
-} else if(Device.batteryLevel() > 0.8 && Device.batteryLevel() <= 1 && !Device.isCharging()){
- 	battery = battery + BatteryText2;
+  	battery = battery + BatteryText1; //充电中（电量充满）
+} else if(Device.batteryLevel() > 0.8 && Device.batteryLevel() <= 1  ){
+ 	battery = battery + BatteryText2; //电量在80-100%
 } else if(Device.batteryLevel() >= 0.7 && Device.batteryLevel() < 0.8){
- 	battery = battery + BatteryText3;
+ 	battery = battery + BatteryText3; //电量在70-79%
 } else if(Device.batteryLevel() >= 0.5 && Device.batteryLevel() < 0.7){
- 	battery = battery + BatteryText4;
+ 	battery = battery + BatteryText4; //电量在50-69%
 } else if(Device.batteryLevel() >= 0.4 && Device.batteryLevel() < 0.5 && !Device.isCharging()){
- 	battery = battery + BatteryText5;
+ 	battery = battery + BatteryText5; //电量在40-49% 且不在充电中
 } else if(Device.batteryLevel() >= 0.4 && Device.batteryLevel() < 0.5 &&  Device.isCharging()){
-	battery = battery + BatteryText10;
+	battery = battery + BatteryText10; //在充电中
 } else if(Device.batteryLevel() >= 0.3 && Device.batteryLevel() < 0.4 && !Device.isCharging()){
- 	battery = battery + BatteryText6;
+ 	battery = battery + BatteryText6; //电量在30-39% 且不在充电中
 } else if(Device.batteryLevel() >= 0.3 && Device.batteryLevel() < 0.4 &&  Device.isCharging()){
- 	battery = battery + BatteryText10;
+ 	battery = battery + BatteryText10; //在充电中
 } else if(Device.batteryLevel() >= 0.2 && Device.batteryLevel() < 0.3 && !Device.isCharging()){
-	battery = battery + BatteryText7;
+	battery = battery + BatteryText7; //电量在20-29% 且不在充电中
 } else if(Device.batteryLevel() >= 0.2 && Device.batteryLevel() < 0.3 &&  Device.isCharging()){
-	battery = battery + BatteryText10;
+	battery = battery + BatteryText10; //在充电中
 } else if(Device.batteryLevel() >= 0.1 && Device.batteryLevel() < 0.2 && !Device.isCharging()){
-  	battery = battery + BatteryText8;
+  	battery = battery + BatteryText8; //电量在10-19% 且不在充电中
 } else if(Device.batteryLevel() >= 0.1 && Device.batteryLevel() < 0.2 &&  Device.isCharging()){
-	battery = battery + BatteryText10;
+	battery = battery + BatteryText10; //在充电中
 } else if(Device.batteryLevel() <= 0.1 && !Device.isCharging()){
- 	battery = battery + BatteryText9;
+ 	battery = battery + BatteryText9; //电量在1-9% 且不在充电中
 } else if(Device.batteryLevel() <= 0.1 &&  Device.isCharging()){
 	battery = battery + BatteryText10;
 }
@@ -923,9 +929,15 @@ dateStack.addSpacer(LeftSpacer);//Left spacing,向左对齐间距
 
 // Date label
 // 日期
-const datetext = dateStack.addText("📅 "+Datefull + " ");
-datetext.font = DateTextFont; 
-datetext.textColor = DateTextColor; 
+const datetext = dateStack.addText(Datefull + " ");
+datetext.font = DateTextFont;
+if( weekday = "星期六" ){
+	datetext.textColor = sundayTextColor;
+}if( weekday = "星期日" ){
+	datetext.textColor = sundayTextColor;
+}else{
+	datetext.textColor = DateTextColor
+}
 datetext.textOpacity = DateTextOpacity; 
 datetext.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
 
