@@ -939,10 +939,10 @@ const datetext = dateStack.addText(Datefull + " ");
 datetext.font = DateTextFont;
 if( weekday = "星期六" ){
 	datetext.textColor = sundayTextColor;
-}if( weekday = "星期日" ){
+} if( weekday = "星期日" ){
 	datetext.textColor = sundayTextColor;
-}else{
-	datetext.textColor = DateTextColor
+} if ( (weekday = "星期一") || (weekday = "星期二") || (weekday = "星期三") || (weekday = "星期四") || (weekday = "星期五") ){
+	datetext.textColor = DateTextColor;
 }
 datetext.textOpacity = DateTextOpacity; 
 datetext.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
