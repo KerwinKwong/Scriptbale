@@ -17,6 +17,7 @@
  * 5、增加农历显示
  * 6、增加了几个节日提醒
  * 7、周末日期字体红色显示红色
+ * 8、适配中文天气简报（天气描述、体感温度、最高温度、风速）
 */
 
 /*========================================
@@ -322,7 +323,7 @@ console.log(curLocation.latitude);
 console.log(curLocation.longitude);
 
 //let wetherurl = "http://api.openweathermap.org/data/2.5/weather?id=" + CITY_WEATHER + "&APPID=" + API_WEATHER + "&units=" + TEMPERATURE;
-let wetherurl = "http://api.openweathermap.org/data/2.5/weather?lat=" + curLocation.latitude + "&lon=" + curLocation.longitude + "&appid=" + API_WEATHER + "&units=" + TEMPERATURE;
+let wetherurl = "http://api.openweathermap.org/data/2.5/weather?lat=" + curLocation.latitude + "&lon=" + curLocation.longitude + "&appid=" + API_WEATHER + "&units=" + TEMPERATURE + "&lang=zh_cn";
 
 const weatherJSON = await fetchWeatherData(wetherurl);
 const cityName = weatherJSON.name;
@@ -334,6 +335,9 @@ const curTemp = curTempObj.temp;
 const highTemp = curTempObj.temp_max;
 const lowTemp = curTempObj.temp_min;
 const feel_like = curTempObj.feels_like;
+const description = weatherarry[0].description;
+const speedwind = weatherJSON.wind;
+const speed = speedwind.speed;
 //Completed loading weather data
 
 /*
@@ -753,7 +757,7 @@ let fellStack = widgetHello.addStack();
 fellStack.addSpacer(LeftSpacer);
 // Widget feel temp
 // 天气简报（最高温度与最低温度）
-const feeltext =fellStack.addText(weathername + " today" + "." + " It feel like " + Math.round(feel_like) + UNITS + ";" + " the high will  be " + Math.round(highTemp) + UNITS);
+const feeltext =fellStack.addText("今日  " + description + " " + " 体感: " + Math.round(feel_like) + UNITS + ";" + " 最高: " + Math.round(highTemp) + UNITS + " 风速: " + speed + "米/秒");
 feeltext.font = FeelTextFont; 
 feeltext.textColor = FellTextColor;
 feeltext.textOpacity = FellTextOpacity; 
