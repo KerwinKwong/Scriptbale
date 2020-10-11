@@ -27,18 +27,18 @@
  * ==========
  * 
 */
-let TopSpacer  = 15 //顶部间距
-let HSpacer    = 5 //纵向间距
-let LeftSpacer = 5 //向左对齐间距
+const TopSpacer  = 15 //顶部间距
+const HSpacer    = 5 //纵向间距
+const LeftSpacer = 5 //向左对齐间距
 /*
  * Greetings Font/Color set
  * 问候语字体、颜色设置
  * ========================
  * 
 */
-let HelloFont    = Font.boldSystemFont(35) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
-let HelloColor   = "ffffff" //字体颜色
-let HelloOpacity = (1) //字体不透明度
+const HelloFont    = Font.boldSystemFont(35) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+const HelloColor   = new Color("ffffff") //字体颜色
+const HelloOpacity = (1) //字体不透明度
 
 /*
  * Battery Font/Color set
@@ -47,44 +47,44 @@ let HelloOpacity = (1) //字体不透明度
 */
 // Battery status color set
 // 电量状态颜色设置
-let FullyChargedColor = 'ff5f40'; //满电提示颜色（判断条件：电量在充电中，并充满电的状态）
-let ChargingColor     = '5e5ce6'; //正在充电中  （判断条件：在充电中且未充满电）
-let AdequateColor     = 'c4fb6d'; //电量充足颜色（判断条件：电量在80-100%）
-let NormalColor       = 'd3de32'; //电量正常颜色（判断条件：电量在50-79%）
-let Low1Corl          = 'e5df88'; //电量低颜色  （判断条件：电量在30-49%）
-let Low2Corl          = 'ffd571'; //电量偏低颜色（判断条件：电量在20-39%）
-let ScarcityColor     = 'ec0101'; //电量极低颜色（判断条件：电量在0-19%）
+const FullyChargedColor = new Color("ff5f40") //满电提示颜色（判断条件：电量在充电中，并充满电的状态）
+const ChargingColor     = new Color("5e5ce6") //正在充电中  （判断条件：在充电中且未充满电）
+const AdequateColor     = new Color("c4fb6d") //电量充足颜色（判断条件：电量在80-100%）
+const NormalColor       = new Color("d3de32") //电量正常颜色（判断条件：电量在50-79%）
+const Low1Corl          = new Color("e5df88") //电量低颜色  （判断条件：电量在30-49%）
+const Low2Corl          = new Color("ffd571") //电量偏低颜色（判断条件：电量在20-39%）
+const ScarcityColor     = new Color("ec0101") //电量极低颜色（判断条件：电量在0-19%）
 
 // Battery status text set
 // 电量状态提示语设置
-let BatteryText0   = " ⚡" //当接入充电电源提示符
-let BatteryText1   = " ⚡ 已充满电!请拔下电源!" //当充满电还在充电中
-let BatteryText2   = " 电量充足,很有安全感!!!" //当电量在80-100%
-let BatteryText3   = " 电量充足,不出远门没有问题!" //当电量在70-80%
-let BatteryText4   = " 电量还有大半呢,不用着急充电!" //当电量在50-70%
-let BatteryText5   = " 电量用了一半,有时间就充电啦!" //当电量在40-50%
-let BatteryText6   = " 电量用了大半了,尽快充电啦!" //当电量在30-40%
-let BatteryText7   = " 电量就快用完,赶紧充电!" //当电量在20-30%
-let BatteryText8   = " 电量就剩不到20%了,尽快充电!" //当电量在10-20%
-let BatteryText9   = " 电量将耗尽,再不充电我就关机了!" //当电量少于10%
-let BatteryText10  = " 正在充入电能中..." //当电量在 < 50%
-let BatteryText12  = "电能"
+const BatteryText0   = " ⚡" //当接入充电电源提示符
+const BatteryText1   = " ⚡ 已充满电!请拔下电源!" //当充满电还在充电中
+const BatteryText2   = " 电量充足,很有安全感!!!" //当电量在80-100%
+const BatteryText3   = " 电量充足,不出远门没有问题!" //当电量在70-80%
+const BatteryText4   = " 电量还有大半呢,不用着急充电!" //当电量在50-70%
+const BatteryText5   = " 电量用了一半,有时间就充电啦!" //当电量在40-50%
+const BatteryText6   = " 电量用了大半了,尽快充电啦!" //当电量在30-40%
+const BatteryText7   = " 电量就快用完,赶紧充电!" //当电量在20-30%
+const BatteryText8   = " 电量就剩不到20%了,尽快充电!" //当电量在10-20%
+const BatteryText9   = " 电量将耗尽,再不充电我就关机了!" //当电量少于10%
+const BatteryText10  = " 正在充入电能中..." //当电量在 < 50%
+const BatteryText12  = "电能"
 
 // 电量提示语字体大小设置
-let BatteryTextFont = Font.regularSystemFont(12); //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
-let BatteryTextOpacity = (1); //字体不透明度0-1,0.5=半透明
+const BatteryTextFont = Font.regularSystemFont(12); //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+const BatteryTextOpacity = (1); //字体不透明度0-1,0.5=半透明
 
 /*
  * YearProgress Font/Color set
  * 年进度部分字体、颜色配置
  * ==========================
 */
-let YearProgressText1Font    = Font.regularSystemFont(12); //进度条字体,如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
-let YearProgressTextOpacity  = (1); //字体不透明度0-1,0.5=半透明
-let YearProgressColor        = '6886c5' //颜色
-let Yearicons                = "今年" //年进度图标
-let YearProgressText2Font    = Font.regularSystemFont(14); //标语字体,如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
-let YearProgressText         = " 𝒚𝒐𝒖 𝒅𝒊𝒅 𝒚𝒐𝒖𝒓 𝒃𝒆𝒔𝒕 𝒕𝒐𝒅𝒂𝒚 ?!" //年进度标语
+const YearProgressText1Font    = Font.regularSystemFont(12); //进度条字体,如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+const YearProgressTextOpacity  = (1); //字体不透明度0-1,0.5=半透明
+const YearProgressColor        = new Color("6886c5") //颜色
+const Yearicons                = "今年" //年进度图标
+const YearProgressText2Font    = Font.regularSystemFont(14); //标语字体,如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+const YearProgressText         = " 𝒚𝒐𝒖 𝒅𝒊𝒅 𝒚𝒐𝒖𝒓 𝒃𝒆𝒔𝒕 𝒕𝒐𝒅𝒂𝒚 ?!" //年进度标语
 
 /*
  * DATE日期信息配置
@@ -92,14 +92,14 @@ let YearProgressText         = " 𝒚𝒐𝒖 𝒅𝒊𝒅 𝒚𝒐𝒖𝒓 𝒃
  * 
 */
 // 公历日期字体、颜色设置
-let DateTextFont            = Font.regularSystemFont(18) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
-let DateTextColor           = "ffffff" //字体颜色
-let DateTextOpacity         = (0.9) //字体不透明度
+const DateTextFont            = Font.regularSystemFont(18) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+const DateTextColor           = new Color("ffffff") //字体颜色
+const DateTextOpacity         = (0.9) //字体不透明度
 
 // 农历日期字体、颜色设置
-let LunarDateTextFont       = new Font("Menlo", 18) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
-let LunarDateTextColor      = "ffffff" //字体颜色
-let LunarDateTextOpacity    = (0.9) //字体不透明度
+const LunarDateTextFont       = new Font("Menlo", 18) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+const LunarDateTextColor      = new Color("ffffff") //字体颜色
+const LunarDateTextOpacity    = (0.9) //字体不透明度
 
 /*
  * WEATHER set
@@ -109,30 +109,30 @@ let LunarDateTextOpacity    = (0.9) //字体不透明度
 */
 // Load Your api in "".Get a free API key here: https://openweathermap.org/appid
 // 在 "" 内填写你的API—_KEY。在此处获取免费的API密钥：https://openweathermap.org/appid
-let API_WEATHER = "89065f71db2277c83d22a779a34f16a7"; 
+const API_WEATHER = "89065f71db2277c83d22a779a34f16a7"; 
 
 // add your city ID
 // 在 "" 内填入你的City ID。
-let CITY_WEATHER = "1809858";
+// const CITY_WEATHER = "1809858";//使用获取定位时不需填此项
 
 // Set to imperial for Fahrenheit, or metric for Celsius
 // 华氏度设置为英制imperial，摄氏度设置为公制metric
-let TEMPERATURE = "metric";
+const TEMPERATURE = "metric";
 
 // Use "\u2103" to show degrees celcius and "\u2109" to show degrees farenheit.
 // 使用 "\u2103" 为摄氏度,使用 "\u2109" 为华氏度。
-let UNITS = "\u2103";
+const UNITS = "\u2103";
 
-// 最高/低温度字体、颜色设置
-let FeelTextFont = Font.regularSystemFont(12) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
-let FellTextColor = "e6e6e6" //字体颜色
-let FellTextOpacity = (0.7) //字体不透明度
+// 最高/体感度字体、颜色设置
+const FeelTextFont = Font.regularSystemFont(12) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+const FellTextColor = new Color("e6e6e6") //字体颜色
+const FellTextOpacity = (0.7) //字体不透明度
 
 // 当前天气字体、颜色设置
-let TempTextFont = Font.regularSystemFont(25) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
-let TempTextColor = "ffffff" //字体颜色
-let TempTextOpacity = (1) //字体不透明度
-let iconsSize = new Size(30, 30) //天气图标尺寸大小
+const TempTextFont = Font.regularSystemFont(25) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+const TempTextColor = new Color("ffffff") //字体颜色
+const TempTextOpacity = (1) //字体不透明度
+const iconsSize = new Size(30, 30) //天气图标尺寸大小
 
 /*========================================
  ***************以下是参数部分***************
@@ -312,14 +312,14 @@ async function fetchWeatherData(url) {
 }
 
 // Get Location 
-/*Location.setAccuracyToBest();
+// 获取定位信息
+Location.setAccuracyToBest();
 let curLocation = await Location.current();
 console.log(curLocation.latitude);
-console.log(curLocation.longitude);*/
+console.log(curLocation.longitude);
 
-let wetherurl = "http://api.openweathermap.org/data/2.5/weather?id=" + CITY_WEATHER + "&APPID=" + API_WEATHER + "&units=" + TEMPERATURE;
-//"http://api.openweathermap.org/data/2.5/weather?lat=" + curLocation.latitude + "&lon=" + curLocation.longitude + "&appid=" + API_WEATHER + "&units=metric";
-//"http://api.openweathermap.org/data/2.5/weather?id=" + CITY_WEATHER + "&APPID=" + API_WEATHER + "&units=metric"
+//let wetherurl = "http://api.openweathermap.org/data/2.5/weather?id=" + CITY_WEATHER + "&APPID=" + API_WEATHER + "&units=" + TEMPERATURE;
+let wetherurl = "http://api.openweathermap.org/data/2.5/weather?lat=" + curLocation.latitude + "&lon=" + curLocation.longitude + "&appid=" + API_WEATHER + "&units=" + TEMPERATURE;
 
 const weatherJSON = await fetchWeatherData(wetherurl);
 const cityName = weatherJSON.name;
@@ -664,32 +664,32 @@ function renderBattery() {
 // Year Render
 // 年进度信息
 function getYearProgress() {
-  const now = new Date()
-  const start = new Date(now.getFullYear(), 0, 1) // Start of this year
-  const end = new Date(now.getFullYear() + 1, 0, 1) // End of this year
-  const yearPassed = (now - start)
-  const yearALL = (end - start)
-  const yearPercen = (yearPassed) / (yearALL)
-  const yearProgress = Math.round(yearPercen * 100);
-  return yearProgress + "%";
+	const now = new Date()
+	const start = new Date(now.getFullYear(), 0, 1) // Start of this year
+	const end = new Date(now.getFullYear() + 1, 0, 1) // End of this year
+	const yearPassed = (now - start)
+	const yearALL = (end - start)
+	const yearPercen = (yearPassed) / (yearALL)
+	const yearProgress = Math.round(yearPercen * 100);
+	return yearProgress + "%";
 }
 function renderYear() {
-  const now = new Date()
-  const start = new Date(now.getFullYear(), 0, 1) // Start of this year
-  const end = new Date(now.getFullYear() + 1, 0, 1) // End of this year
-  const yearPassed = (now - start)
-  const yearALL = (end - start)
-  const yearPercen = (yearPassed) / (yearALL)
-  const yearAscii = yearPercen;  
-  const passed = '▓'.repeat(Math.floor(yearAscii * 10));
-  const left = '░'.repeat(10 - passed.length);
-  const yearProgress = " " + passed + left + " ";
-  return yearProgress;
+	const now = new Date()
+	const start = new Date(now.getFullYear(), 0, 1) // Start of this year
+	const end = new Date(now.getFullYear() + 1, 0, 1) // End of this year
+	const yearPassed = (now - start)
+	const yearALL = (end - start)
+	const yearPercen = (yearPassed) / (yearALL)
+	const yearAscii = yearPercen;  
+	const passed = '▓'.repeat(Math.floor(yearAscii * 10));
+	const left = '░'.repeat(10 - passed.length);
+	const yearProgress = " " + passed + left + " ";
+	return yearProgress;
 }
 
 if (config.runsInWidget) {
-  let widget = new ListWidget()
-  widget.backgroundImage = files.readImage(path)
+	let widget = new ListWidget()
+	widget.backgroundImage = files.readImage(path)
   
 /*========================================
  ***************以下是小组件部分*************
@@ -712,23 +712,23 @@ helloStack.addSpacer(LeftSpacer); //Left spacing,向左对齐间距
 // Greeting label
 // 问候标签
 const hello = helloStack.addText(greeting + "  ");
-	  hello.font = HelloFont; 
-	  hello.textColor = new Color(HelloColor); 
-	  hello.textOpacity = HelloOpacity; 
+hello.font = HelloFont; 
+hello.textColor = HelloColor; 
+hello.textOpacity = HelloOpacity; 
 	//hello.leftAlignText(); // 对齐设置,在Stack上无效
 
 // Weather icons in stack
 // 天气图标
 var img = Image.fromFile(await fetchimagelocal(iconData + "_ico"));
 const widgetimg = helloStack.addImage(img); 
-	  widgetimg.imageSize = iconsSize; 
+widgetimg.imageSize = iconsSize; 
 	//widgetimg.leftAlignImage(); // 对齐设置,在Stack上无效
 
 // tempeture label in stack
 // 温度
 let temptext = helloStack.addText(Math.round(curTemp).toString()+UNITS);
 	temptext.font = TempTextFont; 
-	temptext.textColor = new Color(TempTextColor); 
+	temptext.textColor = TempTextColor; 
 	temptext.textOpacity = TempTextOpacity; 
   //temptext.leftAlignText(); // 对齐设置,在Stack上无效
 
@@ -746,9 +746,9 @@ fellStack.addSpacer(LeftSpacer);
 // Widget feel temp
 // 天气简报（最高温度与最低温度）
 const feeltext =fellStack.addText(weathername + " today" + "." + " It feel like " + Math.round(feel_like) + UNITS + ";" + " the high will  be " + Math.round(highTemp) + UNITS);
-	  feeltext.font = FeelTextFont; 
-	  feeltext.textColor = new Color(FellTextColor);
-	  feeltext.textOpacity = FellTextOpacity; 
+feeltext.font = FeelTextFont; 
+feeltext.textColor = FellTextColor;
+feeltext.textOpacity = FellTextOpacity; 
 	//feeltext.leftAlignText(); // 对齐设置,在Stack上无效
 
 // Spacing between feel and yearprogress
@@ -766,33 +766,33 @@ yearStack.addSpacer(LeftSpacer); //Left spacing,向左对齐间距
 // Year icon in stack
 // 年进度图标
 const YearProgressicon = yearStack.addText(Yearicons)
-	  YearProgressicon.font = YearProgressText1Font //font and size,字体与大小
-	  YearProgressicon.textColor = new Color(YearProgressColor) //font color,字体颜色
-	  YearProgressicon.textOpacity = YearProgressTextOpacity; //opacity,不透明度
+YearProgressicon.font = YearProgressText1Font //font and size,字体与大小
+YearProgressicon.textColor = YearProgressColor //font color,字体颜色
+YearProgressicon.textOpacity = YearProgressTextOpacity; //opacity,不透明度
 	//YearProgressicon.leftAlignText(); // 对齐设置,在Stack上无效
 
 // Year label in stack
 // 年进度条、标签
 const YearProgress = yearStack.addText(renderYear())
-	  YearProgress.font = new Font('Menlo', 12) //font and size,字体与大小
-	  YearProgress.textColor = new Color(YearProgressColor) //font color,字体颜色
-	  YearProgress.textOpacity = YearProgressTextOpacity; 
+YearProgress.font = new Font('Menlo', 12) //font and size,字体与大小
+YearProgress.textColor = YearProgressColor //font color,字体颜色
+YearProgress.textOpacity = YearProgressTextOpacity; 
 	//YearProgress.leftAlignText();// 对齐设置,在Stack上无效
 
 // Year percent in stack
 // 年进度百分比
 const YearPercentage = yearStack.addText(getYearProgress())
-	  YearPercentage.font = YearProgressText1Font 
-	  YearPercentage.textColor = new Color(YearProgressColor) 
-	  YearPercentage.textOpacity = (1); 
+YearPercentage.font = YearProgressText1Font 
+YearPercentage.textColor = YearProgressColor
+YearPercentage.textOpacity = (1); 
 	//YearPercentage.leftAlignText(); // 对齐设置,在Stack上无效
 
 // Year slogan in stack
 // 年进度标语
 const YearSlogan = yearStack.addText(YearProgressText)
-	  YearSlogan.font = YearProgressText2Font 
-	  YearSlogan.textColor = new Color(YearProgressColor) 
-	  YearSlogan.textOpacity = (YearProgressTextOpacity);
+YearSlogan.font = YearProgressText2Font 
+YearSlogan.textColor = YearProgressColor
+YearSlogan.textOpacity = (YearProgressTextOpacity);
 	//YearSlogan.leftAlignText(); // 对齐设置,在Stack上无效
 
 
@@ -813,19 +813,19 @@ batteryStack.addSpacer(LeftSpacer); //Left spacing,向左对齐间距
 const batteryicon = batteryStack.addText(BatteryText12);
 	batteryicon.font = BatteryTextFont;
 if(Device.isCharging() && Device.batteryLevel()  < 1){
-  	batteryicon.textColor = new Color(ChargingColor); //font color,充电状态字体颜色
+  	batteryicon.textColor = ChargingColor; //font color,充电状态字体颜色
 } if(Device.isCharging() && Device.batteryLevel() >= 1 || Device.isFullyCharged()){
-  	batteryicon.textColor = new Color(FullyChargedColor); //font color,满电提示字体颜色
+  	batteryicon.textColor = FullyChargedColor; //font color,满电提示字体颜色
 } else if(Device.batteryLevel() >= 0.8 && Device.batteryLevel() <= 1 &&  !Device.isCharging()){
-  	batteryicon.textColor = new Color(AdequateColor); //font color,电量充足字体颜色
+  	batteryicon.textColor = AdequateColor; //font color,电量充足字体颜色
 } else if(Device.batteryLevel() >= 0.5 && Device.batteryLevel() < 0.8 && !Device.isCharging()){
-  	batteryicon.textColor = new Color(NormalColor); //font color,电量正常字体颜色
+  	batteryicon.textColor = NormalColor; //font color,电量正常字体颜色
 } else if(Device.batteryLevel() >= 0.3 && Device.batteryLevel() < 0.5 && !Device.isCharging()){
-  	batteryicon.textColor = new Color(Low1Corl); //font color,电量偏低字体颜色
+  	batteryicon.textColor = Low1Corl; //font color,电量偏低字体颜色
 } else if(Device.batteryLevel() >= 0.2 && Device.batteryLevel() < 0.3 && !Device.isCharging()){
-  	batteryicon.textColor = new Color(Low2Corl); //font color,电量低字体颜色
+  	batteryicon.textColor = Low2Corl; //font color,电量低字体颜色
 } else if(Device.batteryLevel() >= 0 &&   Device.batteryLevel() < 0.2 && !Device.isCharging()){
-	batteryicon.textColor = new Color(ScarcityColor); //font color,电量不足字体颜色
+	batteryicon.textColor = ScarcityColor; //font color,电量不足字体颜色
 }
 	batteryicon.textOpacity = BatteryTextOpacity; //opacity,不透明度
 	batteryicon.leftAlignText(); //AlignText,对齐方式(center,left,right)
@@ -835,19 +835,19 @@ if(Device.isCharging() && Device.batteryLevel()  < 1){
 const batteryLine = batteryStack.addText(renderBattery());
 	batteryLine.font = new Font("Menlo", 12); //font and size,字体与大小
 if(Device.isCharging() && Device.batteryLevel()  < 1){
-  	batteryLine.textColor = new Color(ChargingColor); //font color,充电状态字体颜色
+  	batteryLine.textColor = ChargingColor; //font color,充电状态字体颜色
 } if(Device.isCharging() && Device.batteryLevel() >= 1 || Device.isFullyCharged()){
-	batteryLine.textColor = new Color(FullyChargedColor); //font color,满电提示字体颜色
+	batteryLine.textColor = FullyChargedColor; //font color,满电提示字体颜色
 } else if(Device.batteryLevel() >= 0.8 && Device.batteryLevel() <= 1  && !Device.isCharging()){
-  	batteryLine.textColor = new Color(AdequateColor); //font color,电量充足字体颜色
+  	batteryLine.textColor = AdequateColor; //font color,电量充足字体颜色
 } else if(Device.batteryLevel() >= 0.5 && Device.batteryLevel() < 0.8 && !Device.isCharging()){
- 	batteryLine.textColor = new Color(NormalColor); //font color,电量正常字体颜色
+ 	batteryLine.textColor = NormalColor; //font color,电量正常字体颜色
 } else if(Device.batteryLevel() >= 0.3 && Device.batteryLevel() < 0.5 && !Device.isCharging()){
-  	batteryLine.textColor = new Color(Low1Corl); //font color,电量偏低字体颜色
+  	batteryLine.textColor = Low1Corl; //font color,电量偏低字体颜色
 } else if(Device.batteryLevel() >= 0.2 && Device.batteryLevel() < 0.3 && !Device.isCharging()){
-  	batteryLine.textColor = new Color(Low2Corl); //font color,电量低字体颜色
+  	batteryLine.textColor = Low2Corl; //font color,电量低字体颜色
 } else if(Device.batteryLevel() >= 0 &&   Device.batteryLevel() < 0.2 && !Device.isCharging()){
-  	batteryLine.textColor = new Color(ScarcityColor); //font color,电量不足字体颜色
+  	batteryLine.textColor = ScarcityColor; //font color,电量不足字体颜色
 }
 	batteryLine.textOpacity = BatteryTextOpacity;
 	//batteryLine.leftAlignText(); // 对齐设置,在Stack上无效
@@ -891,19 +891,19 @@ if(Device.isCharging() && Device.batteryLevel() < 1 ){
 let batterytext = batteryStack.addText(battery);
 	batterytext.font = BatteryTextFont; //font and size,字体与大小
 if(Device.isCharging() && Device.batteryLevel() < 1){
-	batterytext.textColor = new Color(ChargingColor); //font color,充电状态字体颜色
+	batterytext.textColor = ChargingColor; //font color,充电状态字体颜色
 } if(Device.isCharging() && Device.batteryLevel() >= 1 || Device.isFullyCharged()){
-  	batterytext.textColor = new Color(FullyChargedColor); //font color,满电提示字体颜色
+  	batterytext.textColor = FullyChargedColor; //font color,满电提示字体颜色
 } else if(Device.batteryLevel() >= 0.8 && Device.batteryLevel() <= 1 && !Device.isCharging()){
-  	batterytext.textColor = new Color(AdequateColor); //font color,电量充足字体颜色
+  	batterytext.textColor = AdequateColor; //font color,电量充足字体颜色
 } else if(Device.batteryLevel() >= 0.5 && Device.batteryLevel() < 0.8 && !Device.isCharging()){
-  	batterytext.textColor = new Color(NormalColor); //font color,电量正常字体颜色
+  	batterytext.textColor = NormalColor; //font color,电量正常字体颜色
 } else if(Device.batteryLevel() >= 0.3 && Device.batteryLevel() < 0.5 && !Device.isCharging()){
-  	batterytext.textColor = new Color(Low1Corl); //font color,电量偏低字体颜色
+  	batterytext.textColor = Low1Corl; //font color,电量偏低字体颜色
 } else if(Device.batteryLevel() >= 0.2 && Device.batteryLevel() < 0.3 && !Device.isCharging()){
-  	batterytext.textColor = new Color(Low2Corl); //font color,电量低字体颜色
+  	batterytext.textColor = Low2Corl; //font color,电量低字体颜色
 } else if(Device.batteryLevel() >= 0 && Device.batteryLevel() < 0.2 && !Device.isCharging()){
-	batterytext.textColor = new Color(ScarcityColor); //font color,电量不足字体颜色
+	batterytext.textColor = ScarcityColor; //font color,电量不足字体颜色
 }
 	batterytext.textOpacity = BatteryTextOpacity; //opacity,不透明度
 	batterytext.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
@@ -924,15 +924,15 @@ dateStack.addSpacer(LeftSpacer);//Left spacing,向左对齐间距
 // Date label
 // 日期
 const datetext = dateStack.addText("📅 "+Datefull + " ");
-	  datetext.font = DateTextFont; 
-	  datetext.textColor = new Color(DateTextColor); 
-	  datetext.textOpacity = DateTextOpacity; 
-	  datetext.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
+datetext.font = DateTextFont; 
+datetext.textColor = DateTextColor; 
+datetext.textOpacity = DateTextOpacity; 
+datetext.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
 
 // 农历
 const lunarDateText = dateStack.addText(Lunar);
 	  lunarDateText.font = LunarDateTextFont; //font and size,字体与大小
-	  lunarDateText.textColor = new Color(LunarDateTextColor); //font color,字体颜色
+	  lunarDateText.textColor = LunarDateTextColor; //font color,字体颜色
 	  lunarDateText.textOpacity = LunarDateTextOpacity; //opacity,不透明度
 	  lunarDateText.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
 
