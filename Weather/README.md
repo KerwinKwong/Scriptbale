@@ -6,12 +6,12 @@
 2.到[Open Weather](https://openweathermap.org)注册,获取你的`API_KEY`和`City_ID`填入下面代码中
 
 - API_Key：注册后到API keys页面生成
-- City_ID：搜索你的城市名，例如`Guangzhou`，点进去该城市页面后，URL后的数字即`City_ID`
+- City_ID：~~搜索你的城市名，例如`Guangzhou`，点进去该城市页面后，URL后的数字即`City_ID`~~(最新版不需要填)
 
 ```js
 	//API_KEY
 	let API_WEATHER = "XXXXXXXXXXXXXXXX";//Load Your api here
-	let CITY_WEATHER = "XXXXXX";//add your city ID
+        let CITY_WEATHER = "XXXXXX";//add your city ID
 ```
 3.下载`Hello-Weather.js`到Scriptable/复制全部代码到你的Scriptable，新建一个Script，粘贴（代码是这个[点击这里](https://raw.githubusercontent.com/xkerwin/Scriptbale/main/Weather/Hello-Weather.js)）
 
