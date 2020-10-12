@@ -43,6 +43,6 @@ align=center>
 <img src="https://github.com/xkerwin/Scriptbale/blob/main/image/充电中.jpg" width = "400" height = "175" alt="充电中" 
 align=center>
 
-### Tanks 
+### Thanks 
 - [JamarcusBourne](https://www.reddit.com/u/solelo/?utm_source=share&utm_medium=ios_app&utm_name=iossmf)
 - [GitHub](https://gist.github.com/Otherguy5826/a7a74b076e1bea6baaa6dd35d57090a9)
