@@ -760,14 +760,12 @@ const hello = helloStack.addText(greeting + "  ");
 hello.font = HelloFont; 
 hello.textColor = HelloColor; 
 hello.textOpacity = HelloOpacity; 
-	//hello.leftAlignText(); // 对齐设置,在Stack上无效
 
 // Weather icons in stack
 // 天气图标
 var img = Image.fromFile(await fetchimagelocal(iconData + "_ico"));
 const widgetimg = helloStack.addImage(img); 
 widgetimg.imageSize = iconsSize; 
-	//widgetimg.leftAlignImage(); // 对齐设置,在Stack上无效
 
 // tempeture label in stack
 // 温度
@@ -775,10 +773,7 @@ let temptext = helloStack.addText(Math.round(curTemp).toString()+UNITS);
 	temptext.font = TempTextFont; 
 	temptext.textColor = TempTextColor; 
 	temptext.textOpacity = TempTextOpacity; 
-  //temptext.leftAlignText(); // 对齐设置,在Stack上无效
 
-// Spacing between tempt and feel
-// 温度与天气简报行之间的间距
 
 // define horizontal stack
 // 创建一个stack，使下面组件都在同一个stack中，布局为横向布局（hStack2）
@@ -792,10 +787,7 @@ const feeltext =fellStack.addText("今日  " + description + " " + " 体感: " +
 feeltext.font = FeelTextFont; 
 feeltext.textColor = FellTextColor;
 feeltext.textOpacity = FellTextOpacity; 
-	//feeltext.leftAlignText(); // 对齐设置,在Stack上无效
 
-// Spacing between feel and yearprogress
-// 天气简报与年进度行之间的间距
 
 // define horizontal stack
 // 创建一个stack，使下面组件都在同一个stack中，布局为横向布局（hStack0）
@@ -833,12 +825,7 @@ const YearSlogan = yearStack.addText(localizedText.YearText1)
 YearSlogan.font = YearProgressText2Font 
 YearSlogan.textColor = YearProgressColor
 YearSlogan.textOpacity = (YearProgressTextOpacity);
-	//YearSlogan.leftAlignText(); // 对齐设置,在Stack上无效
-yearStack.setPadding(0, padding, 0, padding)
 
-
-// Spacing between yearprogress and battery
-// 年进度与电量行间距
 
 // define horizontal stack
 // 创建一个stack，使下面组件都在同一个stack中，布局为横向布局（hStack1）
@@ -866,7 +853,6 @@ if(Device.isCharging() && Device.batteryLevel()  < 1){
 	batteryicon.textColor = ScarcityColor; //font color,电量不足字体颜色
 }
 	batteryicon.textOpacity = BatteryTextOpacity; //opacity,不透明度
-	batteryicon.leftAlignText(); //AlignText,对齐方式(center,left,right)
 
 // Battery Progress in stack
 // 电量进度条、颜色
@@ -888,7 +874,6 @@ if(Device.isCharging() && Device.batteryLevel()  < 1){
   	batteryLine.textColor = ScarcityColor; //font color,电量不足字体颜色
 }
 	batteryLine.textOpacity = BatteryTextOpacity;
-	//batteryLine.leftAlignText(); // 对齐设置,在Stack上无效
 
 // Battery Status in stack
 // 电量状态、提示语
@@ -944,11 +929,6 @@ if(Device.isCharging() && Device.batteryLevel() < 1){
 	batterytext.textColor = ScarcityColor; //font color,电量不足字体颜色
 }
 	batterytext.textOpacity = BatteryTextOpacity; //opacity,不透明度
-	batterytext.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
-
-// Spacing between battery and date
-// 电量与日期之间的间距
-
 
 // define horizontal stack
 // 创建一个stack，使下面组件都在同一个stack中，布局为横向布局（hStack2）
@@ -976,7 +956,6 @@ const lunarDateText = dateStack.addText(Lunar);
 	  lunarDateText.font = LunarDateTextFont; //font and size,字体与大小
 	  lunarDateText.textColor = LunarDateTextColor; //font color,字体颜色
 	  lunarDateText.textOpacity = LunarDateTextOpacity; //opacity,不透明度
-	  lunarDateText.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
 
 
  widgetHello.backgroundImage = widget.backgroundImage
