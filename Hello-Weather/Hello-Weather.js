@@ -24,87 +24,6 @@
  ***************以下是设置部分***************
  ========================================*/ 
 
- /*
- * Spacer set
- * 间距设置
- * ==========
- * 
-*/
-const TopSpacer  = 15 //顶部间距
-const HSpacer    = 5 //纵向间距
-const LeftSpacer = 5 //向左对齐间距
-/*
- * Greetings Font/Color set
- * 问候语字体、颜色设置
- * ========================
- * 
-*/
-const HelloFont    = Font.boldSystemFont(35) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
-const HelloColor   = new Color("ffffff") //字体颜色
-const HelloOpacity = (1) //字体不透明度
-
-/*
- * Battery Font/Color set
- * 电量部分字体、颜色配置
- * =======================
-*/
-// Battery status color set
-// 电量状态颜色设置
-const FullyChargedColor = new Color("ff5f40") //满电提示颜色（判断条件：电量在充电中，并充满电的状态）
-const ChargingColor     = new Color("5e5ce6") //正在充电中  （判断条件：在充电中且未充满电）
-const AdequateColor     = new Color("c4fb6d") //电量充足颜色（判断条件：电量在80-100%）
-const NormalColor       = new Color("d3de32") //电量正常颜色（判断条件：电量在50-79%）
-const Low1Corl          = new Color("e5df88") //电量低颜色  （判断条件：电量在30-49%）
-const Low2Corl          = new Color("ffd571") //电量偏低颜色（判断条件：电量在20-39%）
-const ScarcityColor     = new Color("ec0101") //电量极低颜色（判断条件：电量在0-19%）
-
-// Battery status text set
-// 电量状态提示语设置
-const BatteryText0   = " ⚡" //当接入充电电源提示符
-const BatteryText1   = " ⚡ 已充满电!请拔下电源!" //当充满电还在充电中
-const BatteryText2   = " 电量充足,很有安全感!!!" //当电量在80-100%
-const BatteryText3   = " 电量充足,不出远门没有问题!" //当电量在70-80%
-const BatteryText4   = " 电量还有大半呢,不用着急充电!" //当电量在50-70%
-const BatteryText5   = " 电量用了一半,有时间就充电啦!" //当电量在40-50%
-const BatteryText6   = " 电量用了大半了,尽快充电啦!" //当电量在30-40%
-const BatteryText7   = " 电量就快用完,赶紧充电!" //当电量在20-30%
-const BatteryText8   = " 电量就剩不到20%了,尽快充电!" //当电量在10-20%
-const BatteryText9   = " 电量将耗尽,再不充电我就关机了!" //当电量少于10%
-const BatteryText10  = " 正在充入电能中..." //当电量在 < 50%
-const BatteryText12  = "电能"
-
-// 电量提示语字体大小设置
-const BatteryTextFont = Font.regularSystemFont(12); //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
-const BatteryTextOpacity = (1); //字体不透明度0-1,0.5=半透明
-
-/*
- * YearProgress Font/Color set
- * 年进度部分字体、颜色配置
- * ==========================
-*/
-const YearProgressText1Font    = Font.regularSystemFont(12); //进度条字体,如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
-const YearProgressTextOpacity  = (1); //字体不透明度0-1,0.5=半透明
-const YearProgressColor        = new Color("6886c5") //颜色
-const Yearicons                = "今年" //年进度图标
-const YearProgressText2Font    = Font.regularSystemFont(14); //标语字体,如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
-const YearProgressText         = " 𝒚𝒐𝒖 𝒅𝒊𝒅 𝒚𝒐𝒖𝒓 𝒃𝒆𝒔𝒕 𝒕𝒐𝒅𝒂𝒚 ?!" //年进度标语
-
-/*
- * DATE日期信息配置
- * ================
- * 
-*/
-// 公历日期字体、颜色设置
-const DateTextFont            = Font.regularSystemFont(18) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
-const DateTextColor           = new Color("ffffff") //字体颜色
-const sundayTextColor         = new Color("ff5f40") //字体颜色
-const DateTextOpacity         = (0.9) //字体不透明度
-
-// 农历日期字体、颜色设置
-const LunarDateTextFont       = new Font("Menlo", 18) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
-const LunarDateTextColor      = new Color("ffffff") //字体颜色
-const LunarDateTextOpacity    = (0.9) //字体不透明度
-
 /*
  * WEATHER set
  * 天气信息配置
@@ -113,7 +32,7 @@ const LunarDateTextOpacity    = (0.9) //字体不透明度
 */
 // Load Your api in "".Get a free API key here: https://openweathermap.org/appid
 // 在 "" 内填写你的API—_KEY。在此处获取免费的API密钥：https://openweathermap.org/appid
-const API_WEATHER = "89065f71db2277c83d22a779a34f16a7"; 
+const API_WEATHER = "df3d78683a5a918e7f5bd44a8e831605"; 
 
 // add your city ID
 // 在 "" 内填入你的City ID。
@@ -126,6 +45,115 @@ const TEMPERATURE = "metric";
 // Use "\u2103" to show degrees celcius and "\u2109" to show degrees farenheit.
 // 使用 "\u2103" 为摄氏度,使用 "\u2109" 为华氏度。
 const UNITS = "\u2103";
+
+// Set the locale code. Leave blank "" to match the device's locale. You can change the hard-coded text strings in the TEXT section below.
+// 设置语言环境代码。“”内保留空白以匹配设备的语言环境。您可以在下面的“文本”部分中更改硬编码的文本字符串。
+let locale = "zh_cn"
+
+// Set to true for fixed location, false to update location as you move around
+// 固定使用当前位置设置为true，更换了位置时设置为false以更新位置信息
+const lockLocation = true
+
+// Make sure we have a locale value.
+// 语言环境值，对应上面设置的语言，不设置将使用设备的语言
+if (locale == "" || locale == null) { locale = Device.locale() }
+
+// Declare the data variables.
+// 声明数据变量
+var locationData, sunData, weatherData
+
+// Create global constants.
+// 创建全局常量
+const currentDate = new Date()
+const files = FileManager.local()
+
+// Set the padding around each item. Default is 5.
+// 设置默认的边距（更多边距设置参考xxxStack.setpadding）
+const padding  = 5 
+
+/*
+ * Greetings Font/Color set
+ * 问候语字体、颜色设置
+ * ========================
+ * 
+*/
+const HelloFont    = Font.boldSystemFont(35) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+const HelloColor   = new Color("ffffff") //字体颜色
+const HelloOpacity = (1) //字体不透明度
+
+// You can change the language or wording of any other text in the widget.
+// 您可以更改小部件中任何其他文本的语言。
+const  localizedText = {
+	// 每个时段问候语
+	sleepGreeting: "赶紧睡觉!!!"
+	,morningGreeting: "早上好.靓仔"
+	,noonGreeting: "中午好.靓仔"
+	,afternoonGreeting: "下午好.靓仔"
+	,eveningGreeting: "晚上好.靓仔"
+	,nightGreeting:"睡觉时间.靓仔"
+
+	// Battery status text set
+	// 电量状态提示语设置
+	,BatteryText0:  " ⚡" //当接入充电电源提示符
+	,BatteryText1:  " ⚡ 已充满电!请拔下电源!" //当充满电还在充电中
+	,BatteryText2:  " 电量充足,很有安全感!!!" //当电量在80-100%
+	,BatteryText3:  " 电量充足,不出远门没有问题!" //当电量在70-80%
+	,BatteryText4:  " 电量还有大半呢,不用着急充电!" //当电量在50-70%
+	,BatteryText5:  " 电量用了一半,有时间就充电啦!" //当电量在40-50%
+	,BatteryText6:  " 电量用了大半了,尽快充电啦!" //当电量在30-40%
+	,BatteryText7:  " 电量就快用完,赶紧充电!" //当电量在20-30%
+	,BatteryText8:  " 电量就剩不到20%了,尽快充电!" //当电量在10-20%
+	,BatteryText9:  " 电量将耗尽,再不充电我就关机了!" //当电量少于10%
+	,BatteryText10: " 正在充入电能中..." //当电量在 < 50%
+	,BatteryText12: "电能" //电量前的文字
+
+	//年进度
+	,YearText0: "今年" //年进度前的文字
+	,YearText1: " 𝒚𝒐𝒖 𝒅𝒊𝒅 𝒚𝒐𝒖𝒓 𝒃𝒆𝒔𝒕 𝒕𝒐𝒅𝒂𝒚 ?!" //年进度标语
+
+}
+
+/*
+ * Font/Color set
+ * 字体、颜色配置
+ * =======================
+*/
+
+// Battery status color set
+// 电量状态颜色设置
+const FullyChargedColor = new Color("ff5f40") //满电提示颜色（判断条件：电量在充电中，并充满电的状态）
+const ChargingColor     = new Color("5e5ce6") //正在充电中  （判断条件：在充电中且未充满电）
+const AdequateColor     = new Color("c4fb6d") //电量充足颜色（判断条件：电量在80-100%）
+const NormalColor       = new Color("d3de32") //电量正常颜色（判断条件：电量在50-79%）
+const Low1Corl          = new Color("e5df88") //电量低颜色  （判断条件：电量在30-49%）
+const Low2Corl          = new Color("ffd571") //电量偏低颜色（判断条件：电量在20-39%）
+const ScarcityColor     = new Color("ec0101") //电量极低颜色（判断条件：电量在0-19%）
+
+
+// 电量提示语字体大小设置
+const BatteryTextFont = Font.regularSystemFont(12); //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+const BatteryTextOpacity = (1); //字体不透明度0-1,0.5=半透明
+
+// YearProgress Font/Color set
+// 年进度部分字体、颜色配置
+
+const YearProgressText1Font    = Font.regularSystemFont(12); //进度条字体,如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+const YearProgressTextOpacity  = (1); //字体不透明度0-1,0.5=半透明
+const YearProgressColor        = new Color("6886c5") //颜色
+const YearProgressText2Font    = Font.regularSystemFont(14); //标语字体,如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+
+
+// 公历日期字体、颜色设置
+const DateTextFont            = Font.regularSystemFont(18) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+const DateTextColor           = new Color("ffffff") //字体颜色
+const sundayTextColor         = new Color("ff5f40") //字体颜色
+const DateTextOpacity         = (0.9) //字体不透明度
+
+// 农历日期字体、颜色设置
+const LunarDateTextFont       = new Font("Menlo", 18) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
+const LunarDateTextColor      = new Color("ffffff") //字体颜色
+const LunarDateTextOpacity    = (0.9) //字体不透明度
+
 
 // 最高/体感度字体、颜色设置
 const FeelTextFont = Font.regularSystemFont(12) //如果使用非系统字体请用这个格式：new Font("Menlo", 12),""内是字体,数字是字体大小
@@ -143,10 +171,8 @@ const iconsSize = new Size(30, 30) //天气图标尺寸大小
  ========================================*/ 
 
 const filename = Script.name() + ".jpg"
-const files = FileManager.local()
 const path = files.joinPath(files.documentsDirectory(), filename)
 let widgetHello = new ListWidget(); 
-var today = new Date();
 
 var widgetInputRAW = args.widgetParameter;
 
@@ -160,7 +186,9 @@ var widgetInput = widgetInputRAW.toString();
 
 var inputArr = widgetInput.split("|");
 
+
 // iCloud file path
+// iCloud 文件路径
 var scriptableFilePath = "/var/mobile/Library/Mobile Documents/iCloud~dk~simonbs~Scriptable/Documents/";
 var removeSpaces1 = inputArr[0].split(" "); // Remove spaces from file name
 var removeSpaces2 = removeSpaces1.join('');
@@ -314,35 +342,84 @@ async function fetchWeatherData(url) {
   const res = await request.loadJSON();
   return res;
 }
+// Set up the locationData object.
+// 设置位置数据对象
+locationData = {}
+const locationPath = files.joinPath(files.documentsDirectory(), "weather-loc")
+  
+// If our location is unlocked or cache doesn't exist, ask iOS for location.
+// 如果位置已解锁定或不存在缓存，询问iOS
+var readLocationFromFile = false
+if (!lockLocation || !files.fileExists(locationPath)) {
+    try {
+    const location = await Location.current()
+    const geocode = await Location.reverseGeocode(location.latitude, location.longitude, locale)
+    locationData.latitude = location.latitude
+    locationData.longitude = location.longitude
+    locationData.locality = geocode[0].locality
+    files.writeString(locationPath, location.latitude + "|" + location.longitude + "|" + locationData.locality)
+      
+    } catch(e) {
+    // If we fail in unlocked mode, read it from the cache.
+    if (!lockLocation) { readLocationFromFile = true }
+        
+    // We can't recover if we fail on first run in locked mode.
+    else { return }
+    }
+ }
+// If our location is locked or we need to read from file, do it.
+// 如果位置信息被锁定或需要从文件中读取，执行此操作
+if (lockLocation || readLocationFromFile) {
+    const locationStr = files.readString(locationPath).split("|")
+    locationData.latitude = locationStr[0]
+    locationData.longitude = locationStr[1]
+    locationData.locality = locationStr[2]
+}
 
-// Get Location 
-// 获取定位信息
-Location.setAccuracyToBest();
-let curLocation = await Location.current();
-console.log(curLocation.latitude);
-console.log(curLocation.longitude);
+// Requirements: location
+if (!locationData) { await setupLocation() }
 
-//let wetherurl = "http://api.openweathermap.org/data/2.5/weather?id=" + CITY_WEATHER + "&APPID=" + API_WEATHER + "&units=" + TEMPERATURE;
-let wetherurl = "http://api.openweathermap.org/data/2.5/weather?lat=" + curLocation.latitude + "&lon=" + curLocation.longitude + "&appid=" + API_WEATHER + "&units=" + TEMPERATURE + "&lang=zh_cn";
+// Set up the cache.
+// 设定缓存
+    const cachePath = files.joinPath(files.documentsDirectory(), "weather-cal-cache")
+    const cacheExists = files.fileExists(cachePath)
+    const cacheDate = cacheExists ? files.modificationDate(cachePath) : 0
+    var weatherDataRaw
 
-const weatherJSON = await fetchWeatherData(wetherurl);
-const cityName = weatherJSON.name;
-const weatherarry = weatherJSON.weather;
+// If cache exists and it's been less than 60 seconds since last request, use cached data.
+// 如果存在缓存，并且距离上次请求少于60秒，使用缓存的数据
+if (cacheExists && (currentDate.getTime() - cacheDate.getTime()) < 60000) {
+    const cache = files.readString(cachePath)
+    weatherDataRaw = JSON.parse(cache)
+
+// Otherwise, use the API to get new weather data.
+// 否则，使用API​​获取新的天气数据
+} else {
+    const weatherReq = "http://api.openweathermap.org/data/2.5/weather?lat=" + locationData.latitude + "&lon=" + locationData.longitude + "&appid=" + API_WEATHER + "&units=" + TEMPERATURE + "&lang=zh_cn";
+    weatherDataRaw = await new Request(weatherReq).loadJSON()
+    files.writeString(cachePath, JSON.stringify(weatherDataRaw))
+}
+// Completed loading weather data
+// 存储天气数据
+const cityName = weatherDataRaw.name;
+const weatherarry = weatherDataRaw.weather;
 const iconData = weatherarry[0].icon;
 const weathername = weatherarry[0].main;
-const curTempObj = weatherJSON.main;
+const curTempObj = weatherDataRaw.main;
 const curTemp = curTempObj.temp;
 const highTemp = curTempObj.temp_max;
 const lowTemp = curTempObj.temp_min;
 const feel_like = curTempObj.feels_like;
 const description = weatherarry[0].description;
-const speedwind = weatherJSON.wind;
+const speedwind = weatherDataRaw.wind;
 const speed = speedwind.speed;
-//Completed loading weather data
+
+console.log(weatherDataRaw)
+
 
 /*
- * DATE
- * ====
+ * DATE/日期
+ * ========
 */
 
 /********************************************************************/
@@ -525,19 +602,9 @@ let lunarYearArr = [
 
 // Get formatted Date.
 // 获取格式化日期。
-//	function getformatteddate(){
-//		var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-//		return months[today.getMonth()] + " " + today.getDate()
-
-
-// Long-form days and months.
-// 日期和月份。
-// 	var days = ['周日','周一','周二','周三','周四','周五','周六'];
-// 	var months = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
-
 function getformatteddate(){	
 	var months = ['壹月','贰月','叁月','肆月','伍月','陆月','柒月','捌月','玖月','拾月','拾壹月','拾贰月'];
-	return months[today.getMonth()] + " " + today.getDate()
+	return months[currentDate.getMonth()] + " " + currentDate.getDate()
 	}
 	
 	// Long-form days and months
@@ -548,27 +615,6 @@ function getformatteddate(){
  * GREETINGS
  * =========
 */
-
-// Greetings arrays per time period. 
-// 每个时间段的问候语。
-var greetingsMorning = [
-'早上好.靓仔'
-];
-var greetingsNoon = [
-'中午好.靓仔'
-];
-var greetingsAfternoon = [
-'下午好.靓仔'
-];
-var greetingsEvening = [
-'晚上好.靓仔'
-];
-var greetingsNight = [
-'睡觉时间.靓仔'
-];
-var greetingsLateNight = [
-'赶紧睡觉!!!'
-];
 
 // Holiday customization.
 // 节日问候语定制。
@@ -581,7 +627,7 @@ var holidaysByKey = {
 
 var holidaysByDate = {
 	// month,date: greeting
-	"1,1": "Happy " + (today.getFullYear()).toString() + "!",
+	"1,1": "Happy " + (currentDate.getFullYear()).toString() + "!",
 	"2.14": "情人节",
 	"10.1": "国庆快乐!!!",
 	"10,31": "🎃万圣节!!!",
@@ -589,15 +635,15 @@ var holidaysByDate = {
 	"12,25": "🎄圣诞节!!!"
 }
 
-var holidayKey = (today.getMonth() + 1).toString() + "," +  (Math.ceil(today.getDate() / 7)).toString() + "," + (today.getDay()).toString();
-var holidayKeyDate = (today.getMonth() + 1).toString() + "," + (today.getDate()).toString();
+var holidayKey = (currentDate.getMonth() + 1).toString() + "," +  (Math.ceil(currentDate.getDate() / 7)).toString() + "," + (currentDate.getDay()).toString();
+var holidayKeyDate = (currentDate.getMonth() + 1).toString() + "," + (currentDate.getDate()).toString();
 
 // Date Calculations.
 // 日期计算。
-var weekday = days[ today.getDay() ];
-var month = months[ today.getMonth() ];
-var date = today.getDate();
-var hour = today.getHours();
+var weekday = days[ currentDate.getDay() ];
+var month = months[ currentDate.getMonth() ];
+var date = currentDate.getDate();
+var hour = currentDate.getHours();
 
 // Append ordinal suffix to date.
 // 日期后缀,中文的全部改为 "日" 即可。
@@ -615,7 +661,7 @@ function ordinalSuffix(input) {
 // Generate date string.
 // 日期生成格式顺序。
 var Datefull = month + ordinalSuffix(date) + "｜" + weekday;
-var lunarDate = sloarToLunar(today.getFullYear(), today.getMonth() + 1, today.getDate())
+var lunarDate = sloarToLunar(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate())
 let Lunar = lunarDate['lunarYear']+lunarDate['lunarMonth']+lunarDate['lunarDay']
 
 // Support for multiple greetings per time period.
@@ -624,19 +670,12 @@ function randomGreeting(greetingArray) {
 	return Math.floor(Math.random() * greetingArray.length);
 }
 var greeting = new String("Howdy.")
-if (hour < 5 && hour >= 1) { // 1am - 5am
-	greeting = greetingsLateNight[randomGreeting(greetingsLateNight)];
-} else if (hour >= 23 || hour < 1) { // 11pm - 1am
-	greeting = greetingsNight[randomGreeting(greetingsNight)];
-} else if (hour < 11) { // Before noon (5am - 12pm)
-	greeting = greetingsMorning[randomGreeting(greetingsMorning)];
-} else if (hour >=11 && hour <= 13)  { // 11am - 1pm
-	greeting = greetingsNoon[randomGreeting(greetingsNoon)];
-} else if (hour > 13 && hour <= 17) { // 1pm - 5pm
-	greeting = greetingsAfternoon[randomGreeting(greetingsAfternoon)];
-} else if (hour > 17 && hour < 23) { // 5pm - 11pm
-	greeting = greetingsEvening[randomGreeting(greetingsEvening)];
-} 
+if (hour    < 5 )  {greeting = localizedText.sleepGreeting;} 
+if (hour    < 11)  {greeting = localizedText.morningGreeting;}
+if (hour-12 < 1 )  {greeting = localizedText.noonGreeting;} 
+if (hour-12 < 6 )  {greeting = localizedText.afternoonGreeting;} 
+if (hour-12 < 10)  {greeting = localizedText.eveningGreeting;} 
+greeting = localizedText.nightGreeting;
 
 // Overwrite greeting if calculated holiday
 // 如果是特定假期,则使用假期问候语
@@ -650,8 +689,8 @@ if (holidaysByDate[holidayKeyDate]) {
 }
 
 /*
- * BATTERY
- * =======
+ * BATTERY/电池电量
+ * ==============
 */
 
 // Battery Render
@@ -669,8 +708,8 @@ function renderBattery() {
 	return batteryAscii; 
 }
 /*
- * YEAR PROGRESS
- * =============
+ * YEAR PROGRESS/年进度
+ * ===================
 */
 
 // Year Render
@@ -709,17 +748,11 @@ if (config.runsInWidget) {
  ========================================*/ 
 
  
-// Top spacing
-// 顶部间距
-widgetHello.addSpacer(TopSpacer);
-
 // define horizontal stack
 // 创建一个stack，使下面组件都在同一个stack中，布局为横向布局（helloStack）
 let helloStack = widgetHello.addStack();
 	helloStack.layoutHorizontally();
-
-// Centers line
-helloStack.addSpacer(LeftSpacer); //Left spacing,向左对齐间距
+	helloStack.setPadding(padding*3, padding, padding/2, padding)
 
 // Greeting label
 // 问候标签
@@ -746,15 +779,13 @@ let temptext = helloStack.addText(Math.round(curTemp).toString()+UNITS);
 
 // Spacing between tempt and feel
 // 温度与天气简报行之间的间距
-widgetHello.addSpacer(HSpacer);
 
 // define horizontal stack
 // 创建一个stack，使下面组件都在同一个stack中，布局为横向布局（hStack2）
 let fellStack = widgetHello.addStack();
 	fellStack.layoutHorizontally();
+	fellStack.setPadding(padding/2 , padding, padding/2, padding)
 
-// Centers line
-fellStack.addSpacer(LeftSpacer);
 // Widget feel temp
 // 天气简报（最高温度与最低温度）
 const feeltext =fellStack.addText("今日  " + description + " " + " 体感: " + Math.round(feel_like) + UNITS + ";" + " 最高: " + Math.round(highTemp) + UNITS + " 风速: " + speed + "米/秒");
@@ -765,19 +796,16 @@ feeltext.textOpacity = FellTextOpacity;
 
 // Spacing between feel and yearprogress
 // 天气简报与年进度行之间的间距
-widgetHello.addSpacer(HSpacer);
 
 // define horizontal stack
 // 创建一个stack，使下面组件都在同一个stack中，布局为横向布局（hStack0）
 let yearStack = widgetHello.addStack();
 	yearStack.layoutHorizontally();
-
-// Centers line
-yearStack.addSpacer(LeftSpacer); //Left spacing,向左对齐间距
+	yearStack.setPadding(padding/2 , padding, padding/2, padding)
 
 // Year icon in stack
 // 年进度图标
-const YearProgressicon = yearStack.addText(Yearicons)
+const YearProgressicon = yearStack.addText(localizedText.YearText0)
 YearProgressicon.font = YearProgressText1Font //font and size,字体与大小
 YearProgressicon.textColor = YearProgressColor //font color,字体颜色
 YearProgressicon.textOpacity = YearProgressTextOpacity; //opacity,不透明度
@@ -801,28 +829,26 @@ YearPercentage.textOpacity = (1);
 
 // Year slogan in stack
 // 年进度标语
-const YearSlogan = yearStack.addText(YearProgressText)
+const YearSlogan = yearStack.addText(localizedText.YearText1)
 YearSlogan.font = YearProgressText2Font 
 YearSlogan.textColor = YearProgressColor
 YearSlogan.textOpacity = (YearProgressTextOpacity);
 	//YearSlogan.leftAlignText(); // 对齐设置,在Stack上无效
+yearStack.setPadding(0, padding, 0, padding)
 
 
 // Spacing between yearprogress and battery
 // 年进度与电量行间距
-widgetHello.addSpacer(HSpacer);
 
 // define horizontal stack
 // 创建一个stack，使下面组件都在同一个stack中，布局为横向布局（hStack1）
 let batteryStack = widgetHello.addStack();
 	batteryStack.layoutHorizontally();
-
-// Centers line
-batteryStack.addSpacer(LeftSpacer); //Left spacing,向左对齐间距
+	batteryStack.setPadding(padding/2 , padding, padding/2, padding)
 
 // Battery icon in stack
 // 电量图标、标签、颜色
-const batteryicon = batteryStack.addText(BatteryText12);
+const batteryicon = batteryStack.addText(localizedText.BatteryText12);
 	batteryicon.font = BatteryTextFont;
 if(Device.isCharging() && Device.batteryLevel()  < 1){
   	batteryicon.textColor = ChargingColor; //font color,充电状态字体颜色
@@ -868,35 +894,35 @@ if(Device.isCharging() && Device.batteryLevel()  < 1){
 // 电量状态、提示语
 var battery =  getBatteryLevel();
 if(Device.isCharging() && Device.batteryLevel() < 1 ){
-	battery = battery + BatteryText0; //充电中并且电量少于100%
+	battery = battery + localizedText.BatteryText0; //充电中并且电量少于100%
 } if(Device.isCharging() && Device.batteryLevel() >= 1 || Device.isFullyCharged()){
-  	battery = battery + BatteryText1; //充电中（电量充满）
+  	battery = battery + localizedText.BatteryText1; //充电中（电量充满）
 } else if(Device.batteryLevel() > 0.8 && Device.batteryLevel() <= 1  ){
- 	battery = battery + BatteryText2; //电量在80-100%
+ 	battery = battery + localizedText.BatteryText2; //电量在80-100%
 } else if(Device.batteryLevel() >= 0.7 && Device.batteryLevel() < 0.8){
- 	battery = battery + BatteryText3; //电量在70-79%
+ 	battery = battery + localizedText.BatteryText3; //电量在70-79%
 } else if(Device.batteryLevel() >= 0.5 && Device.batteryLevel() < 0.7){
- 	battery = battery + BatteryText4; //电量在50-69%
+ 	battery = battery + localizedText.BatteryText4; //电量在50-69%
 } else if(Device.batteryLevel() >= 0.4 && Device.batteryLevel() < 0.5 && !Device.isCharging()){
- 	battery = battery + BatteryText5; //电量在40-49% 且不在充电中
+ 	battery = battery + localizedText.BatteryText5; //电量在40-49% 且不在充电中
 } else if(Device.batteryLevel() >= 0.4 && Device.batteryLevel() < 0.5 &&  Device.isCharging()){
-	battery = battery + BatteryText10; //在充电中
+	battery = battery + localizedText.BatteryText10; //在充电中
 } else if(Device.batteryLevel() >= 0.3 && Device.batteryLevel() < 0.4 && !Device.isCharging()){
- 	battery = battery + BatteryText6; //电量在30-39% 且不在充电中
+ 	battery = battery + localizedText.BatteryText6; //电量在30-39% 且不在充电中
 } else if(Device.batteryLevel() >= 0.3 && Device.batteryLevel() < 0.4 &&  Device.isCharging()){
- 	battery = battery + BatteryText10; //在充电中
+ 	battery = battery + localizedText.BatteryText10; //在充电中
 } else if(Device.batteryLevel() >= 0.2 && Device.batteryLevel() < 0.3 && !Device.isCharging()){
-	battery = battery + BatteryText7; //电量在20-29% 且不在充电中
+	battery = battery + localizedText.BatteryText7; //电量在20-29% 且不在充电中
 } else if(Device.batteryLevel() >= 0.2 && Device.batteryLevel() < 0.3 &&  Device.isCharging()){
-	battery = battery + BatteryText10; //在充电中
+	battery = battery + localizedText.BatteryText10; //在充电中
 } else if(Device.batteryLevel() >= 0.1 && Device.batteryLevel() < 0.2 && !Device.isCharging()){
-  	battery = battery + BatteryText8; //电量在10-19% 且不在充电中
+  	battery = battery + localizedText.BatteryText8; //电量在10-19% 且不在充电中
 } else if(Device.batteryLevel() >= 0.1 && Device.batteryLevel() < 0.2 &&  Device.isCharging()){
-	battery = battery + BatteryText10; //在充电中
+	battery = battery + localizedText.BatteryText10; //在充电中
 } else if(Device.batteryLevel() <= 0.1 && !Device.isCharging()){
- 	battery = battery + BatteryText9; //电量在1-9% 且不在充电中
+ 	battery = battery + localizedText.BatteryText9; //电量在1-9% 且不在充电中
 } else if(Device.batteryLevel() <= 0.1 &&  Device.isCharging()){
-	battery = battery + BatteryText10;
+	battery = battery + localizedText.BatteryText10;
 }
 // Battery Status Color
 // 电量状态颜色
@@ -922,16 +948,13 @@ if(Device.isCharging() && Device.batteryLevel() < 1){
 
 // Spacing between battery and date
 // 电量与日期之间的间距
-widgetHello.addSpacer(HSpacer);
 
 
 // define horizontal stack
 // 创建一个stack，使下面组件都在同一个stack中，布局为横向布局（hStack2）
 let dateStack = widgetHello.addStack();
 	dateStack.layoutHorizontally();
-
-// Centers line
-dateStack.addSpacer(LeftSpacer);//Left spacing,向左对齐间距
+	dateStack.setPadding(padding/2 , padding, padding*3, padding)
 
 // Date label
 // 日期
@@ -947,6 +970,7 @@ if( weekday = "星期六" ){
 datetext.textOpacity = DateTextOpacity; 
 datetext.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
 
+// lunar
 // 农历
 const lunarDateText = dateStack.addText(Lunar);
 	  lunarDateText.font = LunarDateTextFont; //font and size,字体与大小
@@ -954,10 +978,7 @@ const lunarDateText = dateStack.addText(Lunar);
 	  lunarDateText.textOpacity = LunarDateTextOpacity; //opacity,不透明度
 	  lunarDateText.leftAlignText(); //Align,对齐方式(center,left,right)！在同一个stack内的对齐方式不能单独设置，只能调整向左对齐间距大小
 
-// Bottom Spacer
-// 底部间距
- widgetHello.addSpacer();
- widgetHello.setPadding( 0, 0, 0, 0); //设置全局位置
+
  widgetHello.backgroundImage = widget.backgroundImage
  Script.setWidget(widgetHello)
 
