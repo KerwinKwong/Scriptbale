@@ -32,7 +32,7 @@
 */
 // Load Your api in "".Get a free API key here: https://openweathermap.org/appid
 // 在 "" 内填写你的API—_KEY。在此处获取免费的API密钥：https://openweathermap.org/appid
-const API_WEATHER = "df3d78683a5a918e7f5bd44a8e831605"; 
+const API_WEATHER = ""
 
 // add your city ID
 // 在 "" 内填入你的City ID。
