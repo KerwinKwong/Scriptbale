@@ -65,7 +65,7 @@ var locationData, sunData, weatherData
 // Create global constants.
 // 创建全局常量
 const currentDate = new Date()
-const files = FileManager.local()
+const cachefiles = FileManager.local()
 
 // Set the padding around each item. Default is 5.
 // 设置默认的边距（更多边距设置参考xxxStack.setpadding）
@@ -171,7 +171,7 @@ const iconsSize = new Size(30, 30) //天气图标尺寸大小
  ========================================*/ 
 
 const filename = Script.name() + ".jpg"
-const path = files.joinPath(files.documentsDirectory(), filename)
+const path = cachefiles.joinPath(cachefiles.documentsDirectory(), filename)
 let widgetHello = new ListWidget(); 
 
 var widgetInputRAW = args.widgetParameter;
@@ -345,19 +345,19 @@ async function fetchWeatherData(url) {
 // Set up the locationData object.
 // 设置位置数据对象
 locationData = {}
-const locationPath = files.joinPath(files.documentsDirectory(), "weather-loc")
+const locationPath = cachefiles.joinPath(cachefiles.documentsDirectory(), "hello-weather-loc")
   
 // If our location is unlocked or cache doesn't exist, ask iOS for location.
 // 如果位置已解锁定或不存在缓存，询问iOS
 var readLocationFromFile = false
-if (!lockLocation || !files.fileExists(locationPath)) {
+if (!lockLocation || !cachefiles.fileExists(locationPath)) {
     try {
     const location = await Location.current()
     const geocode = await Location.reverseGeocode(location.latitude, location.longitude, locale)
     locationData.latitude = location.latitude
     locationData.longitude = location.longitude
     locationData.locality = geocode[0].locality
-    files.writeString(locationPath, location.latitude + "|" + location.longitude + "|" + locationData.locality)
+    cachefiles.writeString(locationPath, location.latitude + "|" + location.longitude + "|" + locationData.locality)
       
     } catch(e) {
     // If we fail in unlocked mode, read it from the cache.
@@ -370,7 +370,7 @@ if (!lockLocation || !files.fileExists(locationPath)) {
 // If our location is locked or we need to read from file, do it.
 // 如果位置信息被锁定或需要从文件中读取，执行此操作
 if (lockLocation || readLocationFromFile) {
-    const locationStr = files.readString(locationPath).split("|")
+    const locationStr = cachefiles.readString(locationPath).split("|")
     locationData.latitude = locationStr[0]
     locationData.longitude = locationStr[1]
     locationData.locality = locationStr[2]
@@ -381,15 +381,15 @@ if (!locationData) { await setupLocation() }
 
 // Set up the cache.
 // 设定缓存
-    const cachePath = files.joinPath(files.documentsDirectory(), "weather-cal-cache")
-    const cacheExists = files.fileExists(cachePath)
-    const cacheDate = cacheExists ? files.modificationDate(cachePath) : 0
+    const cachePath = cachefiles.joinPath(cachefiles.documentsDirectory(), "hello-weather-cache")
+    const cacheExists = cachefiles.fileExists(cachePath)
+    const cacheDate = cacheExists ? cachefiles.modificationDate(cachePath) : 0
     var weatherDataRaw
 
 // If cache exists and it's been less than 60 seconds since last request, use cached data.
 // 如果存在缓存，并且距离上次请求少于60秒，使用缓存的数据
 if (cacheExists && (currentDate.getTime() - cacheDate.getTime()) < 60000) {
-    const cache = files.readString(cachePath)
+    const cache = cachefiles.readString(cachePath)
     weatherDataRaw = JSON.parse(cache)
 
 // Otherwise, use the API to get new weather data.
@@ -397,7 +397,7 @@ if (cacheExists && (currentDate.getTime() - cacheDate.getTime()) < 60000) {
 } else {
     const weatherReq = "http://api.openweathermap.org/data/2.5/weather?lat=" + locationData.latitude + "&lon=" + locationData.longitude + "&appid=" + API_WEATHER + "&units=" + TEMPERATURE + "&lang=zh_cn";
     weatherDataRaw = await new Request(weatherReq).loadJSON()
-    files.writeString(cachePath, JSON.stringify(weatherDataRaw))
+    cachefiles.writeString(cachePath, JSON.stringify(weatherDataRaw))
 }
 // Completed loading weather data
 // 存储天气数据
@@ -670,12 +670,11 @@ function randomGreeting(greetingArray) {
 	return Math.floor(Math.random() * greetingArray.length);
 }
 var greeting = new String("Howdy.")
-if (hour    < 5 )  {greeting = localizedText.sleepGreeting;} 
-if (hour    < 11)  {greeting = localizedText.morningGreeting;}
-if (hour-12 < 1 )  {greeting = localizedText.noonGreeting;} 
-if (hour-12 < 6 )  {greeting = localizedText.afternoonGreeting;} 
-if (hour-12 < 10)  {greeting = localizedText.eveningGreeting;} 
-greeting = localizedText.nightGreeting;
+if (hour > 1    && hour < 5  )  {greeting = localizedText.sleepGreeting;} 
+if (hour < 11                )  {greeting = localizedText.morningGreeting;}
+if (hour >= 11  && hour < 13 )  {greeting = localizedText.noonGreeting;} 
+if (hour >  13  && hour < 18 )  {greeting = localizedText.afternoonGreeting;} 
+if (hour >  17  && hour < 23 )  {greeting = localizedText.eveningGreeting;} 
 
 // Overwrite greeting if calculated holiday
 // 如果是特定假期,则使用假期问候语
@@ -740,7 +739,7 @@ function renderYear() {
 
 if (config.runsInWidget) {
 	let widget = new ListWidget()
-	widget.backgroundImage = files.readImage(path)
+	widget.backgroundImage = cachefiles.readImage(path)
   
 /*========================================
  ***************以下是小组件部分*************
@@ -1045,7 +1044,7 @@ const lunarDateText = dateStack.addText(Lunar);
   if (exportPhoto) {
     Photos.save(imgCrop)
   } else {
-    files.writeImage(path,imgCrop)
+    cachefiles.writeImage(path,imgCrop)
   }
   
   Script.complete()
