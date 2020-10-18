@@ -6,3 +6,6 @@
 align=center>
 
 ### [Weather-Cal](https://github.com/xkerwin/Weather-Cal)
+
+<img src="https://github.com/xkerwin/Weather-Cal/blob/main/image/Weather-Cal.jpg" width = "400" height = "175" alt="weather-cal" 
+align=center>
